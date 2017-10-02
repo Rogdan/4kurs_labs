@@ -1,3 +1,21 @@
 <resources>
     <string name="app_name">Лаба 1</string>
+    <string name="init_auto">Автозаполнение</string>
+    <string name="start">Стартуем!</string>
+    <string name="continue_string">Продолжить</string>
+
+    <string name="chances">Вероятности</string>
+    <string name="sleep_chance">Уснуть</string>
+    <string name="up_chance">Хода вверх</string>
+    <string name="down_chance">Хода вних</string>
+    <string name="left_chance">Хода влево</string>
+    <string name="right_chance">Хода вправо</string>
+
+    <string name="field">Поле</string>
+    <string name="width">Ширина</string>
+    <string name="height">Высота</string>
+
+    <string name="start_coordinates">Начальные координаты</string>
+    <string name="x">X</string>
+    <string name="y">Y</string>
 </resources>
