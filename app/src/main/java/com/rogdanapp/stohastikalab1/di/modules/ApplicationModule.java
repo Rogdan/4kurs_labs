@@ -2,6 +2,10 @@ package com.rogdanapp.stohastikalab1.di.modules;
 
 import android.content.Context;
 
+import com.rogdanapp.stohastikalab1.data.InMemoryStore;
+
+import javax.inject.Singleton;
+
 import dagger.Module;
 import dagger.Provides;
 
@@ -16,5 +20,11 @@ public class ApplicationModule {
     @Provides
     public Context provideContext() {
         return mContext;
+    }
+
+    @Provides
+    @Singleton
+    public InMemoryStore provideInMemoryStore(){
+        return new InMemoryStore();
     }
 }

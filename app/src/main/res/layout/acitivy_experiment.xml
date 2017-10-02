@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    style="@style/LayoutWithETStyle"
+    android:background="@color/latte_background"
+    >
+
+    <include
+        android:id="@+id/title_bar"
+        layout="@layout/item_title_bar"/>
+
+    <ScrollView
+        style="@style/LayoutWithETStyle"
+        android:layout_below="@+id/title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="vertical"
+            style="@style/LayoutWithETStyle"
+            android:layout_marginTop="@dimen/app_top_bottom_margins"
+            android:layout_marginBottom="@dimen/app_top_bottom_margins"
+            android:layout_marginStart="@dimen/app_left_right_margins"
+            android:layout_marginEnd="@dimen/app_top_bottom_margins"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.rogdanapp.stohastikalab1.ui.components.CustomEditText
+                    android:id="@+id/repeat_count_et"
+                    android:hint="@string/repeat_count"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal"
+                    android:text="@string/experiment_start_repeats"/>
+            </android.support.design.widget.TextInputLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <ProgressBar
+        android:id="@+id/invisible_progress"
+        android:visibility="invisible"
+        android:layout_centerInParent="true"
+        style="?android:progressBarStyleLarge"
+        android:padding="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+
+    <View
+        android:id="@+id/transparent_overlay"
+        android:layout_below="@+id/title_bar"
+        android:layout_above="@+id/play_button_tv"
+        android:background="@color/transparent_alpha"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"/>
+
+    <com.nipunbirla.boxloader.BoxLoaderView
+        android:id="@+id/progress_bar"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:layout_alignTop="@+id/invisible_progress"
+        android:layout_alignBottom="@+id/invisible_progress"
+        android:layout_alignStart="@+id/invisible_progress"
+        android:layout_alignEnd="@+id/invisible_progress"
+        android:background="@drawable/border_progress"
+        app:strokeColor="@android:color/transparent"
+        app:loaderColor="@color/pumpkin"
+        app:strokeWidth="20"/>
+
+    <TextView
+        android:layout_marginStart="@dimen/app_left_right_margins"
+        android:layout_marginEnd="@dimen/app_left_right_margins"
+        style="@style/LightHintTV"
+        android:text="Загрузука 65%\n(1023 / 100 000)"
+        android:layout_below="@+id/invisible_progress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/play_button_tv"
+        style="@style/OrangeButtonStyle"
+        android:text="@string/start"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+</RelativeLayout>

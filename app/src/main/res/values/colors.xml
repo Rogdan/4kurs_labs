@@ -2,12 +2,15 @@
 <resources>
     <color name="colorPrimary">#82d0d8</color>
     <color name="colorPrimaryDark">#044258</color>
-    <color name="colorAccent">#3c0000ff</color>
+    <color name="colorAccent">#e78d04</color>
 
     <color name="pumpkin">#e78d04</color>
     <color name="orange_button">#e2941d</color>
     <color name="white">#ffffff</color>
-    <color name="greyishBrown">#424242</color>
+    <color name="greyish_brown">#424242</color>
     <color name="grey">#a1a1a1</color>
     <color name="dark_gray">#5e5e5e</color>
+    <color name="not_enable_gray">#dfdfdf</color>
+    <color name="transparent_alpha">#966c6c6c</color>
+    <color name="latte_background">#f5f5f5</color>
 </resources>

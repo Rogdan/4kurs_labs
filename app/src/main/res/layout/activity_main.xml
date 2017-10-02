@@ -1,22 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
+    style="@style/LayoutWithETStyle"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.rogdanapp.stohastikalab1.ui.MainActivity">
+    tools:context="com.rogdanapp.stohastikalab1.ui.input.FieldInputActivity"
+    android:background="@color/latte_background"
+    >
 
     <include
         layout="@layout/item_title_bar"
         android:id="@+id/title_bar"/>
 
     <ScrollView
-        android:layout_above="@+id/start_button"
+        style="@style/LayoutWithETStyle"
+        android:id="@+id/root_scroll_view"
+        android:layout_above="@+id/start_button_tv"
         android:layout_below="@+id/title_bar"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <LinearLayout
+            style="@style/LayoutWithETStyle"
             android:paddingStart="@dimen/app_left_right_margins"
             android:paddingEnd="@dimen/app_left_right_margins"
             android:paddingTop="@dimen/app_top_bottom_margins"
@@ -27,6 +33,7 @@
 
             <TextView
                 style="@style/GreyButtonStyle"
+                android:id="@+id/autocomplete_tv"
                 android:text="@string/init_auto"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
@@ -37,48 +44,84 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <EditText
-                android:id="@+id/sleep_chance_et"
-                android:hint="@string/sleep_chance"
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="numberDecimal"
-                />
+                android:layout_height="wrap_content">
 
-            <EditText
-                android:id="@+id/up_chance_et"
-                android:layout_marginTop="10dp"
-                android:hint="@string/up_chance"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="numberDecimal"
-                />
+                <com.rogdanapp.stohastikalab1.ui.components.CustomEditText
+                    android:id="@+id/sleep_chance_et"
+                    style="@style/FloatInputET"
+                    android:hint="@string/sleep_chance"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:imeOptions="actionNext"
+                    android:nextFocusForward="@+id/up_chance_et"
+                    />
+            </android.support.design.widget.TextInputLayout>
 
-            <EditText
-                android:id="@+id/down_chance_et"
-                android:layout_marginTop="10dp"
-                android:hint="@string/down_chance"
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="numberDecimal"
-                />
+                android:layout_height="wrap_content">
 
-            <EditText
-                android:id="@+id/right_chance_et"
-                android:layout_marginTop="10dp"
-                android:hint="@string/right_chance"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="numberDecimal"
-                />
+                <com.rogdanapp.stohastikalab1.ui.components.CustomEditText
+                    style="@style/FloatInputET"
+                    android:id="@+id/up_chance_et"
+                    android:layout_marginTop="10dp"
+                    android:hint="@string/up_chance"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:imeOptions="actionNext"
+                    android:nextFocusForward="@+id/down_chance_et"
+                    />
+            </android.support.design.widget.TextInputLayout>
 
-            <EditText
-                android:id="@+id/left_chance_et"
-                android:layout_marginTop="10dp"
-                android:hint="@string/left_chance"
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="numberDecimal"/>
+                android:layout_height="wrap_content">
+
+                <com.rogdanapp.stohastikalab1.ui.components.CustomEditText
+                    style="@style/FloatInputET"
+                    android:id="@+id/down_chance_et"
+                    android:layout_marginTop="10dp"
+                    android:hint="@string/down_chance"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:imeOptions="actionNext"
+                    android:nextFocusForward="@+id/right_chance_et"
+                    />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.rogdanapp.stohastikalab1.ui.components.CustomEditText
+                    style="@style/FloatInputET"
+                    android:id="@+id/right_chance_et"
+                    android:layout_marginTop="10dp"
+                    android:hint="@string/right_chance"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:imeOptions="actionNext"
+                    android:nextFocusForward="@+id/left_chance_et"
+                    />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.rogdanapp.stohastikalab1.ui.components.CustomEditText
+                    style="@style/FloatInputET"
+                    android:id="@+id/left_chance_et"
+                    android:layout_marginTop="10dp"
+                    android:hint="@string/left_chance"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:imeOptions="actionNext"
+                    android:nextFocusForward="@+id/width_et"
+                    />
+            </android.support.design.widget.TextInputLayout>
 
             <TextView
                 style="@style/DarkSubtitleTS"
@@ -91,29 +134,39 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <EditText
-                    android:id="@+id/width_et"
-                    android:hint="@string/width"
+                <android.support.design.widget.TextInputLayout
                     android:layout_weight="1"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="5dp"
-                    android:inputType="numberDecimal"
-                    android:imeOptions="actionNext"
-                    android:nextFocusForward="@+id/height_et"
-                    />
+                    android:layout_height="wrap_content">
 
-                <EditText
-                    android:id="@+id/height_et"
+                    <com.rogdanapp.stohastikalab1.ui.components.CustomEditText
+                        style="@style/FloatInputET"
+                        android:id="@+id/width_et"
+                        android:hint="@string/width"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="5dp"
+                        android:imeOptions="actionNext"
+                        android:nextFocusForward="@+id/height_et"
+                        />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
                     android:layout_weight="1"
-                    android:hint="@string/height"
                     android:layout_width="0dp"
-                    android:layout_marginStart="5dp"
-                    android:layout_height="wrap_content"
-                    android:inputType="numberDecimal"
-                    android:imeOptions="actionNext"
-                    android:nextFocusForward="@+id/x_et"
-                    />
+                    android:layout_height="wrap_content">
+
+                    <com.rogdanapp.stohastikalab1.ui.components.CustomEditText
+                        style="@style/FloatInputET"
+                        android:id="@+id/height_et"
+                        android:hint="@string/height"
+                        android:layout_width="match_parent"
+                        android:layout_marginStart="5dp"
+                        android:layout_height="wrap_content"
+                        android:imeOptions="actionNext"
+                        android:nextFocusForward="@+id/start_x_et"
+                        />
+                </android.support.design.widget.TextInputLayout>
             </LinearLayout>
 
             <TextView
@@ -127,33 +180,45 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <EditText
-                    android:id="@+id/x_et"
-                    android:hint="@string/x"
+                <android.support.design.widget.TextInputLayout
                     android:layout_weight="1"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="5dp"
-                    android:imeOptions="actionNext"
-                    android:inputType="numberDecimal"
-                    android:nextFocusForward="@+id/y_et"
-                    />
+                    android:layout_height="wrap_content">
 
-                <EditText
-                    android:id="@+id/y_et"
+                    <com.rogdanapp.stohastikalab1.ui.components.CustomEditText
+                        style="@style/FloatInputET"
+                        android:id="@+id/start_x_et"
+                        android:hint="@string/x"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="5dp"
+                        android:imeOptions="actionNext"
+                        android:nextFocusForward="@+id/start_y_et"
+                        />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
                     android:layout_weight="1"
-                    android:hint="@string/y"
                     android:layout_width="0dp"
-                    android:layout_marginStart="5dp"
-                    android:layout_height="wrap_content"
-                    android:imeOptions="actionDone"
-                    android:inputType="numberDecimal"/>
+                    android:layout_height="wrap_content">
+
+                    <com.rogdanapp.stohastikalab1.ui.components.CustomEditText
+                        style="@style/FloatInputET"
+                        android:id="@+id/start_y_et"
+                        android:hint="@string/y"
+                        android:layout_width="match_parent"
+                        android:layout_marginStart="5dp"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal"
+                        android:imeOptions="actionDone"
+                        />
+                </android.support.design.widget.TextInputLayout>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
 
     <TextView
-        android:id="@+id/start_button"
+        android:id="@+id/start_button_tv"
         android:text="@string/continue_string"
         android:layout_alignParentBottom="true"
         style="@style/OrangeButtonStyle"
