@@ -47,7 +47,7 @@ public class ExperimentActivity extends BaseActivity implements ExperimentCompon
     @BindView(R.id.play_button_tv)
     protected TextView playButtonTV;
     @BindView(R.id.chart_layout)
-    protected View chartLoutView;
+    protected View chartLayoutView;
     @BindView(R.id.x_chart)
     protected BarChart xChart;
     @BindView(R.id.y_chart)
@@ -64,6 +64,16 @@ public class ExperimentActivity extends BaseActivity implements ExperimentCompon
         playButtonTV.setText(R.string.start_test);
         titleTV.setText(R.string.experimental);
         repeatCountET.setInputType(InputType.TYPE_CLASS_NUMBER);
+    }
+
+    @OnClick(R.id.refresh_tv)
+    protected void refresh(){
+        presenter.pauseExperiment();
+
+        repeatCountET.setEnabled(true);
+        playButtonTV.setText(R.string.start_test);
+        currentState = STATE_NOTHING;
+        chartLayoutView.setVisibility(View.GONE);
     }
 
     @OnClick(R.id.status_bar_left_iv)
@@ -144,7 +154,7 @@ public class ExperimentActivity extends BaseActivity implements ExperimentCompon
 
     @Override
     public void onExperimentStopped(Field field, Unit unit) {
-        chartLoutView.setVisibility(View.VISIBLE);
+        chartLayoutView.setVisibility(View.VISIBLE);
 
         if (currentState != STATE_PAUSE) {
             playButtonTV.setText(R.string.start_again);

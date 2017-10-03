@@ -42,6 +42,15 @@
                     android:text="@string/experiment_start_repeats"/>
             </android.support.design.widget.TextInputLayout>
 
+            <TextView
+                android:id="@+id/refresh_tv"
+                android:textSize="18sp"
+                android:textColor="@color/colorPrimaryDark"
+                android:text="@string/refresh"
+                android:gravity="end"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
             <LinearLayout
                 android:visibility="gone"
                 android:id="@+id/chart_layout"

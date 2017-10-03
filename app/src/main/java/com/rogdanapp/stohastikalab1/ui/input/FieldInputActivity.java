@@ -80,11 +80,6 @@ public class FieldInputActivity extends BaseActivity implements FieldInputContra
         presenter.bindView(this);
     }
 
-    private boolean isFill(EditText editText) {
-        String text = editText.getText().toString();
-        return !text.trim().isEmpty();
-    }
-
     @OnClick(R.id.autocomplete_tv)
     protected void autocomplete(){
         presenter.autocomplete();
@@ -92,40 +87,51 @@ public class FieldInputActivity extends BaseActivity implements FieldInputContra
 
     @OnClick(R.id.start_button_tv)
     protected void nextScreen() {
-        //// TODO: 02.10.2017 check data is valid
+        if (isFill(upChanceET) && isFill(downChanceET) && isFill(leftChanceET)
+                && isFill(rightChanceET) && isFill(widthET) && isFill(heightET)
+                && isFill(sleepChanceET) && isFill(startXEditText) && isFill(startYEditText)) {
 
-        int width = Integer.valueOf(widthET.getText().toString());
-        int height = Integer.valueOf(heightET.getText().toString());
-        Field field = new Field(width, height);
 
-        if (width < 0 || height < 0) {
-            Informator.toast(this, R.string.field_cant_be_less_zero);
-            return;
+            int width = Integer.valueOf(widthET.getText().toString());
+            int height = Integer.valueOf(heightET.getText().toString());
+            Field field = new Field(width, height);
+
+            if (width < 0 || height < 0) {
+                Informator.toast(this, R.string.field_cant_be_less_zero);
+                return;
+            }
+
+            float upChance = Float.valueOf(upChanceET.getText().toString());
+            float downChance = Float.valueOf(downChanceET.getText().toString());
+            float rightChance = Float.valueOf(rightChanceET.getText().toString());
+            float leftChance = Float.valueOf(leftChanceET.getText().toString());
+            float sleepChance = Float.valueOf(sleepChanceET.getText().toString());
+
+            float sumOfChances = upChance + downChance + rightChance + leftChance + sleepChance;
+            if (sumOfChances != 1f) {
+                Informator.toast(this, R.string.sum_of_chances_must_be_one);
+                return;
+            }
+
+            StepChance stepChance = new StepChance(sleepChance, upChance, downChance, leftChance, rightChance);
+            int startX = Integer.valueOf(startXEditText.getText().toString());
+            int startY = Integer.valueOf(startYEditText.getText().toString());
+
+            if (startX >= width || startY >= height) {
+                Informator.toast(this, R.string.in_field_area);
+                return;
+            }
+            Unit unit = new Unit(stepChance, startX, startY);
+
+            presenter.saveData(field, unit);
+        } else {
+            Informator.toast(this, R.string.all_fields_must_be_filled);
         }
+    }
 
-        float upChance = Float.valueOf(upChanceET.getText().toString());
-        float downChance = Float.valueOf(downChanceET.getText().toString());
-        float rightChance = Float.valueOf(rightChanceET.getText().toString());
-        float leftChance = Float.valueOf(leftChanceET.getText().toString());
-        float sleepChance = Float.valueOf(sleepChanceET.getText().toString());
-
-        float sumOfChances = upChance + downChance + rightChance + leftChance + sleepChance;
-        if (sumOfChances != 1f) {
-            Informator.toast(this, R.string.sum_of_chances_must_be_one);
-            return;
-        }
-
-        StepChance stepChance = new StepChance(sleepChance, upChance, downChance, leftChance, rightChance);
-        int startX = Integer.valueOf(startXEditText.getText().toString());
-        int startY = Integer.valueOf(startYEditText.getText().toString());
-
-        if (startX >= width || startY >= height) {
-            Informator.toast(this, R.string.in_field_area);
-            return;
-        }
-        Unit unit = new Unit(stepChance, startX, startY);
-
-        presenter.saveData(field, unit);
+    private boolean isFill(EditText editText) {
+        String text = editText.getText().toString().trim();
+        return !text.isEmpty() && !text.equals(".");
     }
 
     @Override

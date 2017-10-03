@@ -32,4 +32,6 @@
     <string name="sum_of_chances_must_be_one">Сума вероятностей должа быть равна 1</string>
     <string name="in_field_area">Начало должно быть в пределах поля</string>
     <string name="repeat_count_must_be_positive">Количество повторений должно быть больше нуля</string>
+    <string name="all_fields_must_be_filled">Все поля должны быть заполнеными</string>
+    <string name="refresh">Сброс</string>
 </resources>

@@ -1,6 +1,7 @@
 package com.rogdanapp.stohastikalab1.ui.experiment;
 
 import com.rogdanapp.stohastikalab1.core.Presenter;
+import com.rogdanapp.stohastikalab1.data.Constants;
 import com.rogdanapp.stohastikalab1.data.InMemoryStore;
 import com.rogdanapp.stohastikalab1.data.pojo.Field;
 import com.rogdanapp.stohastikalab1.data.pojo.Unit;
@@ -98,7 +99,10 @@ public class ExperimentPresenter extends Presenter<ExperimentComponent.IExperime
             x = unit.getActualX();
             y = unit.getActualY();
 
-            if (field.isOnField(x, y)) {
+            if (direction == Constants.SLEEP_DIRECTION){
+                field.incOnPointSteps(x, y, direction);
+                return;
+            } else if (field.isOnField(x, y)) {
                 field.incOnPointSteps(x, y, direction);
             } else {
                 return;
