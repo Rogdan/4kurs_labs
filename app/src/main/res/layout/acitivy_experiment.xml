@@ -40,6 +40,14 @@
                     android:inputType="numberDecimal"
                     android:text="@string/experiment_start_repeats"/>
             </android.support.design.widget.TextInputLayout>
+
+
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </com.github.mikephil.charting.charts.LineChart>
         </LinearLayout>
     </ScrollView>
 

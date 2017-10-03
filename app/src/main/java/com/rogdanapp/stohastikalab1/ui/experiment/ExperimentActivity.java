@@ -1,9 +1,7 @@
 package com.rogdanapp.stohastikalab1.ui.experiment;
 
-import android.animation.LayoutTransition;
 import android.support.annotation.NonNull;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -11,6 +9,8 @@ import com.nipunbirla.boxloader.BoxLoaderView;
 import com.rogdanapp.stohastikalab1.R;
 import com.rogdanapp.stohastikalab1.core.BaseActivity;
 import com.rogdanapp.stohastikalab1.data.InMemoryStore;
+import com.rogdanapp.stohastikalab1.data.pojo.Field;
+import com.rogdanapp.stohastikalab1.data.pojo.Unit;
 import com.rogdanapp.stohastikalab1.di.Injector;
 import com.rogdanapp.stohastikalab1.di.scope.ActivityScope;
 
@@ -125,7 +125,7 @@ public class ExperimentActivity extends BaseActivity implements ExperimentCompon
     }
 
     @Override
-    public void onExperimentStopped() {
+    public void onExperimentStopped(Field field, Unit unit) {
         if (currentState != STATE_PAUSE) {
             playButtonTV.setText(R.string.start_again);
             currentState = STATE_NOTHING;
@@ -133,14 +133,6 @@ public class ExperimentActivity extends BaseActivity implements ExperimentCompon
         }
 
         //// TODO: 03.10.2017 getData and build chart
-    }
-
-    protected void initAnimation(View view){
-        ViewGroup fragmentVG = (ViewGroup) view;
-        if (fragmentVG.getLayoutTransition() != null) {
-            fragmentVG.getLayoutTransition().setStartDelay(LayoutTransition.CHANGE_DISAPPEARING, 50);
-            fragmentVG.getLayoutTransition().setStartDelay(LayoutTransition.APPEARING, 50);
-        }
     }
 
     @Subcomponent(modules = ExperimentModule.class)

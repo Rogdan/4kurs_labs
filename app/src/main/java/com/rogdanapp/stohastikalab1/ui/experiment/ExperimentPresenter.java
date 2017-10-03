@@ -16,7 +16,6 @@ import rx.schedulers.Schedulers;
 public class ExperimentPresenter extends Presenter<ExperimentComponent.IExperimentView> implements ExperimentComponent.IExperimentPresenter{
     private InMemoryStore repository;
     private int experimentsCounter;
-    private long allStepsCounter;
     private boolean isPause;
     private Unit unit;
     private Field field;
@@ -72,7 +71,7 @@ public class ExperimentPresenter extends Presenter<ExperimentComponent.IExperime
                 }).doOnCompleted(() -> {
                     if (view().isActive()) {
                         view().hideProgress();
-                        view().onExperimentStopped();
+                        view().onExperimentStopped(field, unit);
                     }
                 }).subscribe();
 
@@ -110,7 +109,6 @@ public class ExperimentPresenter extends Presenter<ExperimentComponent.IExperime
     @Override
     public void restartExperiment(int repeatCount) {
         experimentsCounter = 0;
-        allStepsCounter = 0;
         isPause = false;
         unit.clear();
         field.clear();
