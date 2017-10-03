@@ -2,12 +2,9 @@ package com.rogdanapp.stohastikalab1.ui.experiment;
 
 import com.rogdanapp.stohastikalab1.core.Presenter;
 import com.rogdanapp.stohastikalab1.data.InMemoryStore;
-import com.rogdanapp.stohastikalab1.data.pojo.ExperimentPoint;
 import com.rogdanapp.stohastikalab1.data.pojo.Field;
 import com.rogdanapp.stohastikalab1.data.pojo.Unit;
 import com.rogdanapp.stohastikalab1.tools.Informator;
-
-import java.util.HashMap;
 
 import javax.inject.Inject;
 
@@ -18,8 +15,8 @@ import rx.schedulers.Schedulers;
 
 public class ExperimentPresenter extends Presenter<ExperimentComponent.IExperimentView> implements ExperimentComponent.IExperimentPresenter{
     private InMemoryStore repository;
-    private HashMap<ExperimentPoint, Object> experimentResult;
-    private int experimentsCompleted;
+    private int experimentsCounter;
+    private long allStepsCounter;
     private boolean isPause;
     private Unit unit;
     private Field field;
@@ -38,7 +35,7 @@ public class ExperimentPresenter extends Presenter<ExperimentComponent.IExperime
 
     @Override
     public void continueExperiment(int repeatsCount) {
-        int startFrom = experimentsCompleted;
+        int startFrom = experimentsCounter;
 
         int repeatsCountToNotify = calculateRepeatsCountForNotifyView(repeatsCount);
         isPause = false;
@@ -52,10 +49,10 @@ public class ExperimentPresenter extends Presenter<ExperimentComponent.IExperime
                 }
 
                 letsGetExperiment();
-                experimentsCompleted++;
+                experimentsCounter++;
 
                 if (i % repeatsCountToNotify == 0) {
-                    emitter.onNext(experimentsCompleted);
+                    emitter.onNext(experimentsCounter);
                 }
             }
 
@@ -94,7 +91,7 @@ public class ExperimentPresenter extends Presenter<ExperimentComponent.IExperime
     }
 
     private void letsGetExperiment(){
-        unit.reload();
+        unit.moveToStart();
         int x, y, direction;
 
         while (true) {
@@ -112,10 +109,10 @@ public class ExperimentPresenter extends Presenter<ExperimentComponent.IExperime
 
     @Override
     public void restartExperiment(int repeatCount) {
-        experimentsCompleted = 0;
+        experimentsCounter = 0;
+        allStepsCounter = 0;
         isPause = false;
-        experimentResult = new HashMap<>();
-        unit.reload();
+        unit.clear();
         field.clear();
 
         continueExperiment(repeatCount);

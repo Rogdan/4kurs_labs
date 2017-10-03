@@ -2,6 +2,7 @@ package com.rogdanapp.stohastikalab1.data.pojo;
 
 import java.util.Random;
 
+import static com.rogdanapp.stohastikalab1.data.Constants.DIRECTIONS_COUNT;
 import static com.rogdanapp.stohastikalab1.data.Constants.DOWN_DIRECTION;
 import static com.rogdanapp.stohastikalab1.data.Constants.LEFT_DIRECTION;
 import static com.rogdanapp.stohastikalab1.data.Constants.RIGHT_DIRECTION;
@@ -11,18 +12,28 @@ public class Unit {
     private int startX, startY;
     private int actualX, actualY;
     private StepChance stepChance;
+    private int [] stepsCounter;
 
     public Unit(StepChance stepChance, int startX, int startY) {
         this.startX = startX;
         this.startY = startY;
         this.stepChance = stepChance;
 
-        reload();
+        clear();
     }
 
-    public void reload() {
+    public void clear(){
+        stepsCounter = new int[DIRECTIONS_COUNT];
+        moveToStart();
+    }
+
+    public void moveToStart() {
         actualX = startX;
         actualY = startY;
+    }
+
+    public int getStepsCountForDirection(int direction) {
+        return stepsCounter[direction];
     }
 
     public int randomStep(){
@@ -43,7 +54,7 @@ public class Unit {
                 break;
         }
 
-
+        stepsCounter[randomDirection]++;
         return randomDirection;
     }
 
