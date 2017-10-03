@@ -1,5 +1,6 @@
 package com.rogdanapp.stohastikalab1.ui.experiment;
 
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.text.InputType;
 import android.view.View;
@@ -7,13 +8,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.BarChart;
-import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.components.Description;
+import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
 import com.nipunbirla.boxloader.BoxLoaderView;
 import com.rogdanapp.stohastikalab1.R;
 import com.rogdanapp.stohastikalab1.core.BaseActivity;
 import com.rogdanapp.stohastikalab1.data.InMemoryStore;
-import com.rogdanapp.stohastikalab1.data.pojo.Field;
-import com.rogdanapp.stohastikalab1.data.pojo.Unit;
 import com.rogdanapp.stohastikalab1.di.Injector;
 import com.rogdanapp.stohastikalab1.di.scope.ActivityScope;
 import com.rogdanapp.stohastikalab1.tools.Informator;
@@ -64,6 +67,20 @@ public class ExperimentActivity extends BaseActivity implements ExperimentCompon
         playButtonTV.setText(R.string.start_test);
         titleTV.setText(R.string.experimental);
         repeatCountET.setInputType(InputType.TYPE_CLASS_NUMBER);
+
+        initChats();
+    }
+
+    private void initChats() {
+        Description description = new Description();
+        description.setText("");
+        xChart.setDescription(description);
+        yChart.setDescription(description);
+
+        YAxis axis = yChart.getAxisRight();
+        axis.setValueFormatter((value, axis1) -> " ");
+        axis.setDrawAxisLine(false);
+
     }
 
     @OnClick(R.id.refresh_tv)
@@ -153,7 +170,8 @@ public class ExperimentActivity extends BaseActivity implements ExperimentCompon
     }
 
     @Override
-    public void onExperimentStopped(Field field, Unit unit) {
+    public void onExperimentStopped(int[] yLeftOut, int[] yRightOut, int [] xTopOut, int []xBottomOut) {
+
         chartLayoutView.setVisibility(View.VISIBLE);
 
         if (currentState != STATE_PAUSE) {
@@ -162,18 +180,51 @@ public class ExperimentActivity extends BaseActivity implements ExperimentCompon
             repeatCountET.setEnabled(true);
         }
 
-        initChartData(field, unit);
+        initChartData(yLeftOut, yRightOut, xTopOut, xBottomOut);
     }
 
-    private void initChartData(Field field, Unit unit) {
-        ArrayList<Entry> yUp = new ArrayList<>();
-        ArrayList<Entry> yDown = new ArrayList<>();
-        ArrayList<Entry> xUp = new ArrayList<>();
-        ArrayList<Entry> xDown = new ArrayList<>();
+    private void initChartData(int[] yLeftOut, int[] yRightOut, int [] xTopOut, int []xBottomOut) {
+        xChart.clear();
+        yChart.clear();
 
-        for (int i = 0; i < field.getWidth(); i++) {
+        float groupSpace = 0.08f;
+        float barSpace = 0.03f; // x4 DataSet
+        float start = 0f;
 
+        ArrayList<BarEntry> yLeft = new ArrayList<>();
+        ArrayList<BarEntry> yRight = new ArrayList<>();
+        ArrayList<BarEntry> xTop = new ArrayList<>();
+        ArrayList<BarEntry> xBottom = new ArrayList<>();
+
+        for (int i = 0; i < yLeftOut.length; i++) {
+            yLeft.add(new BarEntry(i, yLeftOut[i]));
+            yRight.add(new BarEntry(i, yRightOut[i]));
         }
+
+        BarDataSet ySet1 = new BarDataSet(yLeft, "Left");
+        ySet1.setColor(Color.BLUE);
+        BarDataSet tSer2 = new BarDataSet(yRight, "Right");
+        tSer2.setColor(Color.RED);
+
+        BarData yData = new BarData(ySet1, tSer2);
+        yChart.setData(yData);
+        yChart.groupBars(0, groupSpace, barSpace);
+        yChart.invalidate();
+
+        for (int i = 0; i < xTopOut.length; i++) {
+            xTop.add(new BarEntry(i, xTopOut[i]));
+            xBottom.add(new BarEntry(i, xBottomOut[i]));
+        }
+
+        BarDataSet xSet1 = new BarDataSet(xTop, "Top");
+        xSet1.setColor(Color.BLUE);
+        BarDataSet xSet2 = new BarDataSet(xBottom, "Bottom");
+        xSet2.setColor(Color.RED);
+
+        BarData xData = new BarData(xSet1, xSet2);
+        xChart.setData(xData);
+        xChart.groupBars(0, groupSpace, barSpace);
+        xChart.invalidate();
     }
 
     @Subcomponent(modules = ExperimentModule.class)

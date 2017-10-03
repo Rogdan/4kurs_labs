@@ -14,12 +14,19 @@ import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
+import static com.rogdanapp.stohastikalab1.data.Constants.*;
+
 public class ExperimentPresenter extends Presenter<ExperimentComponent.IExperimentView> implements ExperimentComponent.IExperimentPresenter{
     private InMemoryStore repository;
     private int experimentsCounter;
     private boolean isPause;
     private Unit unit;
     private Field field;
+
+    private int[] yLeftOut;
+    private int[] yRightOut;
+    private int[] xTopOut;
+    private int[] xBottomtOut;
 
     @Inject
     public ExperimentPresenter(InMemoryStore inMemoryStore) {
@@ -72,7 +79,7 @@ public class ExperimentPresenter extends Presenter<ExperimentComponent.IExperime
                 }).doOnCompleted(() -> {
                     if (view().isActive()) {
                         view().hideProgress();
-                        view().onExperimentStopped(field, unit);
+                        view().onExperimentStopped(yLeftOut, yRightOut, xTopOut, xBottomtOut);
                     }
                 }).subscribe();
 
@@ -105,6 +112,20 @@ public class ExperimentPresenter extends Presenter<ExperimentComponent.IExperime
             } else if (field.isOnField(x, y)) {
                 field.incOnPointSteps(x, y, direction);
             } else {
+                switch (direction) {
+                    case DOWN_DIRECTION:
+                        xBottomtOut[x]++;
+                        break;
+                    case UP_DIRECTION:
+                        xTopOut[x]++;
+                        break;
+                    case LEFT_DIRECTION:
+                        yLeftOut[y]++;
+                        break;
+                    case RIGHT_DIRECTION:
+                        yRightOut[y]++;
+                        break;
+                }
                 return;
             }
         }
@@ -117,9 +138,14 @@ public class ExperimentPresenter extends Presenter<ExperimentComponent.IExperime
         unit.clear();
         field.clear();
 
+        yLeftOut = new int[field.getHeight()];
+        yRightOut = new int[field.getHeight()];
+        xTopOut = new int[field.getWidth()];
+        xBottomtOut = new int[field.getWidth()];
+
         continueExperiment(repeatCount);
     }
 
     private static final int PROGRESS_BAR_ITERATIONS_COUNT = 10000;
-    private static final int MINIMAL_ITEMS_NOTIFYING = 123;
+    private static final int MINIMAL_ITEMS_NOTIFYING = 423;
 }
