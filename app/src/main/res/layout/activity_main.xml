@@ -219,7 +219,7 @@
 
     <TextView
         android:id="@+id/start_button_tv"
-        android:text="@string/continue_string"
+        android:text="@string/next"
         android:layout_alignParentBottom="true"
         style="@style/OrangeButtonStyle"
         android:layout_width="match_parent"

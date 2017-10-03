@@ -4,10 +4,28 @@ import java.util.Random;
 
 public class Field {
     private int width, height;
+    private ExperimentPoint points[][];
 
     public Field(int width, int height) {
         this.width = width;
         this.height = height;
+        this.points = new ExperimentPoint[width][height];
+    }
+
+    public void clear() {
+        points = new ExperimentPoint[width][height];
+    }
+
+    public void incOnPointSteps(int pointX, int pointY, int moveDirection) {
+        ExperimentPoint experimentPoint = points[pointX][pointY];
+        if (experimentPoint == null) {
+            experimentPoint = new ExperimentPoint();
+            experimentPoint.setxCoordinate(pointX);
+            experimentPoint.setyCoordinate(pointY);
+        }
+
+        experimentPoint.incMovesCount(moveDirection);
+        points[pointX][pointY] = experimentPoint;
     }
 
     public int getWidth() {
@@ -26,6 +44,10 @@ public class Field {
         this.height = height;
     }
 
+    public boolean isOnField(int coordinateX, int coordinateY) {
+        return coordinateX >= 0 && coordinateX < width &&
+                coordinateY >= 0 && coordinateY < height;
+    }
 
     public static Field autoComplete() {
         Random random = new Random();

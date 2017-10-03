@@ -26,6 +26,12 @@ import dagger.Module;
 import dagger.Provides;
 import dagger.Subcomponent;
 
+import static com.rogdanapp.stohastikalab1.data.Constants.DOWN_DIRECTION;
+import static com.rogdanapp.stohastikalab1.data.Constants.LEFT_DIRECTION;
+import static com.rogdanapp.stohastikalab1.data.Constants.RIGHT_DIRECTION;
+import static com.rogdanapp.stohastikalab1.data.Constants.SLEEP_DIRECTION;
+import static com.rogdanapp.stohastikalab1.data.Constants.UP_DIRECTION;
+
 public class FieldInputActivity extends BaseActivity implements FieldInputContract.IFieldInputView {
     @Inject
     protected FieldInputPresenter presenter;
@@ -124,11 +130,11 @@ public class FieldInputActivity extends BaseActivity implements FieldInputContra
     public void onAutocompleteResult(Field field, Unit unit) {
         StepChance stepChance = unit.getStepChance();
 
-        upChanceET.setText(String.valueOf(stepChance.getUpChance()));
-        downChanceET.setText(String.valueOf(stepChance.getDownChance()));
-        leftChanceET.setText(String.valueOf(stepChance.getLeftChance()));
-        rightChanceET.setText(String.valueOf(stepChance.getRightChance()));
-        sleepChanceET.setText(String.valueOf(stepChance.getSleepChance()));
+        upChanceET.setText(String.valueOf(stepChance.getChance(UP_DIRECTION)));
+        downChanceET.setText(String.valueOf(stepChance.getChance(DOWN_DIRECTION)));
+        leftChanceET.setText(String.valueOf(stepChance.getChance(LEFT_DIRECTION)));
+        rightChanceET.setText(String.valueOf(stepChance.getChance(RIGHT_DIRECTION)));
+        sleepChanceET.setText(String.valueOf(stepChance.getChance(SLEEP_DIRECTION)));
 
         startXEditText.setText(String.valueOf(unit.getStartX()));
         startYEditText.setText(String.valueOf(unit.getStartY()));

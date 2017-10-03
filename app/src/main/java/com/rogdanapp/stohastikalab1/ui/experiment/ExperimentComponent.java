@@ -8,10 +8,14 @@ import com.rogdanapp.stohastikalab1.core.IBaseView;
 
 public interface ExperimentComponent {
     interface IExperimentView extends IBaseView {
+        void updateProgress(int alreadyDone);
 
+        void onExperimentStopped();
     }
 
     interface IExperimentPresenter {
-
+        void pauseExperiment();
+        void continueExperiment(int repeatCount);
+        void restartExperiment(int repeatCount);
     }
 }

@@ -1,54 +1,46 @@
 package com.rogdanapp.stohastikalab1.data.pojo;
 
+import java.util.Random;
+
+import static com.rogdanapp.stohastikalab1.data.Constants.*;
+
 public class StepChance {
-    private float sleepChance, upChance, downChance, leftChance, rightChance;
+    private Random random;
+    private float chances[];
 
     public StepChance(float sleepChance, float upChance, float downChance, float leftChance, float rightChance) {
-        this.sleepChance = sleepChance;
-        this.upChance = upChance;
-        this.downChance = downChance;
-        this.leftChance = leftChance;
-        this.rightChance = rightChance;
+        this.random = new Random();
+        chances = new float[DIRECTIONS_COUNT];
+
+        setChance(SLEEP_DIRECTION, sleepChance);
+        setChance(UP_DIRECTION, upChance);
+        setChance(DOWN_DIRECTION, downChance);
+        setChance(LEFT_DIRECTION, leftChance);
+        setChance(RIGHT_DIRECTION, rightChance);
     }
 
-    public float getSleepChance() {
-        return sleepChance;
+    public int randomDirection() {
+        float randomValue = random.nextFloat();
+
+        for (int i = 0; i < DIRECTIONS_COUNT; i++) {
+            float directionChance = chances[i];
+
+            if (randomValue <= directionChance) {
+                return i;
+            } else {
+                randomValue -= directionChance;
+            }
+        }
+
+        return SLEEP_DIRECTION;
     }
 
-    public void setSleepChance(float sleepChance) {
-        this.sleepChance = sleepChance;
+    public void setChance(int direction, float value) {
+        chances[direction] = value;
     }
 
-    public float getUpChance() {
-        return upChance;
-    }
-
-    public void setUpChance(float upChance) {
-        this.upChance = upChance;
-    }
-
-    public float getDownChance() {
-        return downChance;
-    }
-
-    public void setDownChance(float downChance) {
-        this.downChance = downChance;
-    }
-
-    public float getLeftChance() {
-        return leftChance;
-    }
-
-    public void setLeftChance(float leftChance) {
-        this.leftChance = leftChance;
-    }
-
-    public float getRightChance() {
-        return rightChance;
-    }
-
-    public void setRightChance(float rightChance) {
-        this.rightChance = rightChance;
+    public float getChance(int direction) {
+        return chances[direction];
     }
 
     public static StepChance autoComplete() {

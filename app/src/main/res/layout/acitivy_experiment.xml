@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     style="@style/LayoutWithETStyle"
     android:background="@color/latte_background"
+    android:animateLayoutChanges="true"
     >
 
     <include
@@ -53,6 +54,7 @@
         />
 
     <View
+        android:visibility="gone"
         android:id="@+id/transparent_overlay"
         android:layout_below="@+id/title_bar"
         android:layout_above="@+id/play_button_tv"
@@ -61,12 +63,12 @@
         android:layout_height="match_parent"/>
 
     <com.nipunbirla.boxloader.BoxLoaderView
+        android:visibility="gone"
         android:id="@+id/progress_bar"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
         android:layout_alignTop="@+id/invisible_progress"
         android:layout_alignBottom="@+id/invisible_progress"
         android:layout_alignStart="@+id/invisible_progress"
@@ -77,10 +79,11 @@
         app:strokeWidth="20"/>
 
     <TextView
+        android:visibility="gone"
+        android:id="@+id/progress_state_tv"
         android:layout_marginStart="@dimen/app_left_right_margins"
         android:layout_marginEnd="@dimen/app_left_right_margins"
         style="@style/LightHintTV"
-        android:text="Загрузука 65%\n(1023 / 100 000)"
         android:layout_below="@+id/invisible_progress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
@@ -88,7 +91,7 @@
     <TextView
         android:id="@+id/play_button_tv"
         style="@style/OrangeButtonStyle"
-        android:text="@string/start"
+        android:text="@string/start_test"
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>

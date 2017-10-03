@@ -2,6 +2,11 @@ package com.rogdanapp.stohastikalab1.data.pojo;
 
 import java.util.Random;
 
+import static com.rogdanapp.stohastikalab1.data.Constants.DOWN_DIRECTION;
+import static com.rogdanapp.stohastikalab1.data.Constants.LEFT_DIRECTION;
+import static com.rogdanapp.stohastikalab1.data.Constants.RIGHT_DIRECTION;
+import static com.rogdanapp.stohastikalab1.data.Constants.UP_DIRECTION;
+
 public class Unit {
     private int startX, startY;
     private int actualX, actualY;
@@ -15,9 +20,31 @@ public class Unit {
         reload();
     }
 
-    private void reload() {
+    public void reload() {
         actualX = startX;
         actualY = startY;
+    }
+
+    public int randomStep(){
+        int randomDirection = stepChance.randomDirection();
+
+        switch (randomDirection) {
+            case UP_DIRECTION:
+                actualY++;
+                break;
+            case DOWN_DIRECTION:
+                actualY--;
+                break;
+            case RIGHT_DIRECTION:
+                actualX++;
+                break;
+            case LEFT_DIRECTION:
+                actualX--;
+                break;
+        }
+
+
+        return randomDirection;
     }
 
     public int getStartX() {
