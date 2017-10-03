@@ -26,4 +26,10 @@
     <string name="experimental">Експериментируем</string>
     <string name="experiment_start_repeats">1000</string>
     <string name="progress_output_format" formatted="false">Обработано %.2f %%\n(%d / %d)</string>
+    <string name="y_report">Отчет по оси У</string>
+    <string name="x_report">Отчет по оси Х</string>
+    <string name="field_cant_be_less_zero">Ширина и высота не могут быть отрицательными</string>
+    <string name="sum_of_chances_must_be_one">Сума вероятностей должа быть равна 1</string>
+    <string name="in_field_area">Начало должно быть в пределах поля</string>
+    <string name="repeat_count_must_be_positive">Количество повторений должно быть больше нуля</string>
 </resources>

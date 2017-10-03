@@ -1,10 +1,13 @@
 package com.rogdanapp.stohastikalab1.ui.experiment;
 
 import android.support.annotation.NonNull;
+import android.text.InputType;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.data.Entry;
 import com.nipunbirla.boxloader.BoxLoaderView;
 import com.rogdanapp.stohastikalab1.R;
 import com.rogdanapp.stohastikalab1.core.BaseActivity;
@@ -13,6 +16,9 @@ import com.rogdanapp.stohastikalab1.data.pojo.Field;
 import com.rogdanapp.stohastikalab1.data.pojo.Unit;
 import com.rogdanapp.stohastikalab1.di.Injector;
 import com.rogdanapp.stohastikalab1.di.scope.ActivityScope;
+import com.rogdanapp.stohastikalab1.tools.Informator;
+
+import java.util.ArrayList;
 
 import javax.inject.Inject;
 
@@ -40,6 +46,12 @@ public class ExperimentActivity extends BaseActivity implements ExperimentCompon
     protected TextView progressStateTV;
     @BindView(R.id.play_button_tv)
     protected TextView playButtonTV;
+    @BindView(R.id.chart_layout)
+    protected View chartLoutView;
+    @BindView(R.id.x_chart)
+    protected BarChart xChart;
+    @BindView(R.id.y_chart)
+    protected BarChart yChart;
 
     @Override
     protected int getLayoutId() {
@@ -51,6 +63,7 @@ public class ExperimentActivity extends BaseActivity implements ExperimentCompon
         currentState = STATE_NOTHING;
         playButtonTV.setText(R.string.start_test);
         titleTV.setText(R.string.experimental);
+        repeatCountET.setInputType(InputType.TYPE_CLASS_NUMBER);
     }
 
     @OnClick(R.id.status_bar_left_iv)
@@ -60,9 +73,14 @@ public class ExperimentActivity extends BaseActivity implements ExperimentCompon
 
     @OnClick(R.id.play_button_tv)
     protected void onPlayPauseClicked() {
+        String repeatCountString = repeatCountET.getText().toString().trim();
+        if (repeatCountString.isEmpty() || repeatCountString.equals("0")) {
+            Informator.toast(this, R.string.repeat_count_must_be_positive);
+            return;
+        }
+
         repeatCountET.setEnabled(false);
-        //// TODO: 03.10.2017 check et is empty
-        int repeatCount = Integer.valueOf(repeatCountET.getText().toString());
+        int repeatCount = Integer.valueOf(repeatCountString);
 
         switch (currentState) {
             case STATE_NOTHING:
@@ -126,13 +144,26 @@ public class ExperimentActivity extends BaseActivity implements ExperimentCompon
 
     @Override
     public void onExperimentStopped(Field field, Unit unit) {
+        chartLoutView.setVisibility(View.VISIBLE);
+
         if (currentState != STATE_PAUSE) {
             playButtonTV.setText(R.string.start_again);
             currentState = STATE_NOTHING;
             repeatCountET.setEnabled(true);
         }
 
-        //// TODO: 03.10.2017 getData and build chart
+        initChartData(field, unit);
+    }
+
+    private void initChartData(Field field, Unit unit) {
+        ArrayList<Entry> yUp = new ArrayList<>();
+        ArrayList<Entry> yDown = new ArrayList<>();
+        ArrayList<Entry> xUp = new ArrayList<>();
+        ArrayList<Entry> xDown = new ArrayList<>();
+
+        for (int i = 0; i < field.getWidth(); i++) {
+
+        }
     }
 
     @Subcomponent(modules = ExperimentModule.class)

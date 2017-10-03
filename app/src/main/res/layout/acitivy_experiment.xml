@@ -5,26 +5,26 @@
     android:layout_height="match_parent"
     style="@style/LayoutWithETStyle"
     android:background="@color/latte_background"
-    android:animateLayoutChanges="true"
     >
 
     <include
         android:id="@+id/title_bar"
         layout="@layout/item_title_bar"/>
 
-    <ScrollView
-        style="@style/LayoutWithETStyle"
+    <android.support.v4.widget.NestedScrollView
+        android:animateLayoutChanges="true"
         android:layout_below="@+id/title_bar"
+        android:scrollbarFadeDuration="3"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/play_button_tv">
 
         <LinearLayout
             android:orientation="vertical"
-            style="@style/LayoutWithETStyle"
-            android:layout_marginTop="@dimen/app_top_bottom_margins"
-            android:layout_marginBottom="@dimen/app_top_bottom_margins"
-            android:layout_marginStart="@dimen/app_left_right_margins"
-            android:layout_marginEnd="@dimen/app_top_bottom_margins"
+            android:paddingTop="@dimen/app_top_bottom_margins"
+            android:paddingBottom="@dimen/app_top_bottom_margins"
+            android:paddingStart="@dimen/app_left_right_margins"
+            android:paddingEnd="@dimen/app_left_right_margins"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -34,6 +34,7 @@
 
                 <com.rogdanapp.stohastikalab1.ui.components.CustomEditText
                     android:id="@+id/repeat_count_et"
+                    android:digits="1234567890"
                     android:hint="@string/repeat_count"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -41,15 +42,44 @@
                     android:text="@string/experiment_start_repeats"/>
             </android.support.design.widget.TextInputLayout>
 
-
-
-            <com.github.mikephil.charting.charts.LineChart
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/chart_layout"
+                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                >
 
-            </com.github.mikephil.charting.charts.LineChart>
-        </LinearLayout>
-    </ScrollView>
+                    <TextView
+                        style="@style/DarkSubtitleTS"
+                        android:layout_marginTop="20dp"
+                        android:text="@string/y_report"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <com.github.mikephil.charting.charts.BarChart
+                        android:id="@+id/y_chart"
+                        android:background="@color/white"
+                        android:minHeight="150dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                    <TextView
+                        style="@style/DarkSubtitleTS"
+                        android:layout_marginTop="20dp"
+                        android:text="@string/x_report"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <com.github.mikephil.charting.charts.BarChart
+                        android:id="@+id/x_chart"
+                        android:background="@color/white"
+                        android:minHeight="150dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+            </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
 
     <ProgressBar
         android:id="@+id/invisible_progress"

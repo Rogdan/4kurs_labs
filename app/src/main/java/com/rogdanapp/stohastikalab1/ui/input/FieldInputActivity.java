@@ -16,6 +16,7 @@ import com.rogdanapp.stohastikalab1.data.pojo.StepChance;
 import com.rogdanapp.stohastikalab1.data.pojo.Unit;
 import com.rogdanapp.stohastikalab1.di.Injector;
 import com.rogdanapp.stohastikalab1.di.scope.ActivityScope;
+import com.rogdanapp.stohastikalab1.tools.Informator;
 import com.rogdanapp.stohastikalab1.ui.experiment.ExperimentActivity;
 
 import javax.inject.Inject;
@@ -97,15 +98,31 @@ public class FieldInputActivity extends BaseActivity implements FieldInputContra
         int height = Integer.valueOf(heightET.getText().toString());
         Field field = new Field(width, height);
 
+        if (width < 0 || height < 0) {
+            Informator.toast(this, R.string.field_cant_be_less_zero);
+            return;
+        }
+
         float upChance = Float.valueOf(upChanceET.getText().toString());
         float downChance = Float.valueOf(downChanceET.getText().toString());
         float rightChance = Float.valueOf(rightChanceET.getText().toString());
         float leftChance = Float.valueOf(leftChanceET.getText().toString());
         float sleepChance = Float.valueOf(sleepChanceET.getText().toString());
 
+        float sumOfChances = upChance + downChance + rightChance + leftChance + sleepChance;
+        if (sumOfChances != 1f) {
+            Informator.toast(this, R.string.sum_of_chances_must_be_one);
+            return;
+        }
+
         StepChance stepChance = new StepChance(sleepChance, upChance, downChance, leftChance, rightChance);
         int startX = Integer.valueOf(startXEditText.getText().toString());
         int startY = Integer.valueOf(startYEditText.getText().toString());
+
+        if (startX >= width || startY >= height) {
+            Informator.toast(this, R.string.in_field_area);
+            return;
+        }
         Unit unit = new Unit(stepChance, startX, startY);
 
         presenter.saveData(field, unit);
