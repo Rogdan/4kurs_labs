@@ -3,5 +3,5 @@
     <!-- Didenko -->
     <string name="didenko_labs">Интеллектуальный анализ данных</string>
     <string name="choose_lab">Выберите лабу</string>
-
+    <string name="words">Слова:</string>
 </resources>
