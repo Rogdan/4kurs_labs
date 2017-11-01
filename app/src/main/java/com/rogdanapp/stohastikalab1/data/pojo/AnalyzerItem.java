@@ -1,4 +1,4 @@
-package com.rogdanapp.stohastikalab1.ui.didenko;
+package com.rogdanapp.stohastikalab1.data.pojo;
 
 import android.support.annotation.NonNull;
 

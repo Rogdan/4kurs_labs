@@ -1,4 +1,4 @@
-package com.rogdanapp.stohastikalab1.ui.didenko;
+package com.rogdanapp.stohastikalab1.data.pojo;
 
 import android.content.Context;
 
@@ -9,8 +9,10 @@ import java.util.*;
 
 public class Analyzer {
     private Context context;
-    private Map<String, Integer> spamWords = new TreeMap<String, Integer>();
-    private Map<String, Integer> hamWords = new TreeMap<String, Integer>();
+    private Map<String, Integer> spamMap = new TreeMap<String, Integer>();
+    private Map<String, Integer> hamMap = new TreeMap<String, Integer>();
+
+    private ArrayList<AnalyzerItem> analyzedHam, analyzedSpam;
 
     private int spamCount, hamCount;
 
@@ -44,14 +46,14 @@ public class Analyzer {
                         case "spam":
                             spamCount += wordArr.size();
                             for (int i = 0; i < wordArr.size(); i++) {
-                                addToMap(wordArr.get(i), spamWords);
+                                addToMap(wordArr.get(i), spamMap);
                             }
 
                             break;
                         case "ham":
                             hamCount += wordArr.size();
                             for (int i = 0; i < wordArr.size(); i++) {
-                                addToMap(wordArr.get(i), hamWords);
+                                addToMap(wordArr.get(i), hamMap);
                             }
 
                             break;
@@ -63,6 +65,9 @@ public class Analyzer {
             }
         }
         scanner.close();
+
+        analyzedHam = convertToFrequencies(hamMap);
+        analyzedSpam = convertToFrequencies(spamMap);
     }
 
     public ArrayList<AnalyzerItem> convertToFrequencies(Map<String, Integer> map) {
@@ -91,12 +96,12 @@ public class Analyzer {
         return convertResult;
     }
 
-    public Map<String, Integer> getSpamWords() {
-        return spamWords;
+    public Map<String, Integer> getSpamMap() {
+        return spamMap;
     }
 
-    public Map<String, Integer> getHamWords() {
-        return hamWords;
+    public Map<String, Integer> getHamMap() {
+        return hamMap;
     }
 
     private void addToMap(String string, Map<String, Integer> map) {
@@ -121,5 +126,21 @@ public class Analyzer {
 
     public void setHamCount(int hamCount) {
         this.hamCount = hamCount;
+    }
+
+    public ArrayList<AnalyzerItem> getAnalyzedHam() {
+        return analyzedHam;
+    }
+
+    public void setAnalyzedHam(ArrayList<AnalyzerItem> analyzedHam) {
+        this.analyzedHam = analyzedHam;
+    }
+
+    public ArrayList<AnalyzerItem> getAnalyzedSpam() {
+        return analyzedSpam;
+    }
+
+    public void setAnalyzedSpam(ArrayList<AnalyzerItem> analyzedSpam) {
+        this.analyzedSpam = analyzedSpam;
     }
 }

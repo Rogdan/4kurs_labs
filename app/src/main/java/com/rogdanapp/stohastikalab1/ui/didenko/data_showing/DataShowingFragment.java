@@ -1,4 +1,4 @@
-package com.rogdanapp.stohastikalab1.ui.didenko;
+package com.rogdanapp.stohastikalab1.ui.didenko.data_showing;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -6,12 +6,16 @@ import android.support.v7.widget.RecyclerView;
 import com.rogdanapp.stohastikalab1.R;
 import com.rogdanapp.stohastikalab1.adapters.AnalyzeAdapter;
 import com.rogdanapp.stohastikalab1.core.BaseFragment;
+import com.rogdanapp.stohastikalab1.data.pojo.AnalyzerItem;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
 
 public class DataShowingFragment extends BaseFragment {
+    private AnalyzeAdapter adapter;
+    private ArrayList<AnalyzerItem> data;
+
     @BindView(R.id.statistic_recycler_view)
     protected RecyclerView recyclerView;
 
@@ -22,12 +26,23 @@ public class DataShowingFragment extends BaseFragment {
 
     @Override
     protected void initView() {
-        AnalyzeAdapter adapter = new AnalyzeAdapter();
-        ArrayList<AnalyzerItem> items = (ArrayList<AnalyzerItem>) getArguments().getSerializable(STATISTIC_KEY);
+        initAdapter();
+    }
 
-        adapter.setItemsList(items);
+    private void initAdapter() {
+        adapter = new AnalyzeAdapter();
+        if (data != null) {
+            adapter.setItemsList(data);
+        }
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
+    }
+
+    public void setShowingItems(ArrayList<AnalyzerItem> statistic) {
+        data = statistic;
+        if (adapter != null) {
+            adapter.setItemsList(data);
+        }
     }
 
     @Override
@@ -39,6 +54,4 @@ public class DataShowingFragment extends BaseFragment {
     protected void unbindPresenter() {
 
     }
-
-    public static final String STATISTIC_KEY = "statistic";
 }

@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.rogdanapp.stohastikalab1.R;
-import com.rogdanapp.stohastikalab1.ui.didenko.AnalyzerItem;
+import com.rogdanapp.stohastikalab1.data.pojo.AnalyzerItem;
 
 import java.util.ArrayList;
 

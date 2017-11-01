@@ -3,6 +3,7 @@ package com.rogdanapp.stohastikalab1.di.modules;
 import android.content.Context;
 
 import com.rogdanapp.stohastikalab1.data.InMemoryStore;
+import com.rogdanapp.stohastikalab1.data.pojo.Analyzer;
 
 import javax.inject.Singleton;
 
@@ -26,5 +27,11 @@ public class ApplicationModule {
     @Singleton
     public InMemoryStore provideInMemoryStore(){
         return new InMemoryStore();
+    }
+
+    @Provides
+    @Singleton
+    public Analyzer provideAnalyzer() {
+        return new Analyzer(mContext);
     }
 }

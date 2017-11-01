@@ -1,17 +1,17 @@
 package com.rogdanapp.stohastikalab1.ui.didenko;
 
-import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.ProgressBar;
 
 import com.rogdanapp.stohastikalab1.R;
+import com.rogdanapp.stohastikalab1.adapters.ViewPagerAdapter;
 import com.rogdanapp.stohastikalab1.core.BaseActivity;
-import com.rogdanapp.stohastikalab1.data.InMemoryStore;
+import com.rogdanapp.stohastikalab1.data.pojo.Analyzer;
+import com.rogdanapp.stohastikalab1.data.pojo.AnalyzerItem;
 import com.rogdanapp.stohastikalab1.di.Injector;
 import com.rogdanapp.stohastikalab1.di.scope.ActivityScope;
 
@@ -25,10 +25,12 @@ import dagger.Provides;
 import dagger.Subcomponent;
 
 public class AnalyzeActivity extends BaseActivity implements AnalyzeContract.IAnalyzeView{
+    private ViewPagerAdapter adapter;
+    private Handler handler;
+    private Runnable runnable;
+
     @Inject
     protected AnalyzePresenter presenter;
-
-    ArrayList<AnalyzerItem> ham, spam;
 
     @BindView(R.id.statystic_view_pager)
     protected ViewPager viewPager;
@@ -39,7 +41,6 @@ public class AnalyzeActivity extends BaseActivity implements AnalyzeContract.IAn
     @BindView(R.id.progress_bar)
     protected ProgressBar progressBar;
 
-
     @Override
     protected int getLayoutId() {
         return R.layout.activity_analize;
@@ -47,45 +48,15 @@ public class AnalyzeActivity extends BaseActivity implements AnalyzeContract.IAn
 
     @Override
     protected void initView() {
-        showProgress();
+        initHandler();
+        initViewPager();
     }
 
     private void initViewPager() {
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-        viewPager.setAdapter(new FragmentStatePagerAdapter(getSupportFragmentManager()) {
-            @Override
-            public Fragment getItem(int position) {
-                DataShowingFragment fragment = new DataShowingFragment();
-                Bundle arguments = new Bundle();
-                switch (position) {
-                    case 0:
-                        arguments.putSerializable(DataShowingFragment.STATISTIC_KEY, ham);
-                        break;
-                    default:
-                    case 1:
-                        arguments.putSerializable(DataShowingFragment.STATISTIC_KEY, spam);
-                        break;
-                }
+        adapter = new ViewPagerAdapter(getSupportFragmentManager(), this);
+        viewPager.setAdapter(adapter);
 
-                fragment.setArguments(arguments);
-                return fragment;
-            }
-
-            @Override
-            public int getCount() {
-                return 2;
-            }
-
-            @Override
-            public CharSequence getPageTitle(int position) {
-                switch (position) {
-                    case 0:
-                        return "Ham";
-                    default:
-                        return "Spam";
-                }
-            }
-        });
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -105,19 +76,23 @@ public class AnalyzeActivity extends BaseActivity implements AnalyzeContract.IAn
         });
     }
 
+    private void initHandler() {
+        handler = new Handler();
+        runnable = () -> presenter.startAnalyze();
+    }
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        handler.removeCallbacks(runnable);
+    }
+
     @Override
     protected void providePresenter() {
         Injector.getApplicationComponent().plus(new AnalyzeModule()).inject(this);
         presenter.bindView(this);
-
-        Analyzer analyzer = new Analyzer(AnalyzeActivity.this);
-        analyzer.analysisData();
-
-        ham = analyzer.convertToFrequencies(analyzer.getHamWords());
-        spam = analyzer.convertToFrequencies(analyzer.getSpamWords());
-
-        initViewPager();
-        hideProgress();
+        showProgress();
+        handler.postDelayed(runnable, DELAY_TIME_MILLIS);
     }
 
     @Override
@@ -137,6 +112,11 @@ public class AnalyzeActivity extends BaseActivity implements AnalyzeContract.IAn
         screenContent.setVisibility(View.VISIBLE);
     }
 
+    @Override
+    public void onDataAnalyzed(ArrayList<AnalyzerItem> analyzedHam, ArrayList<AnalyzerItem> analyzedSpam) {
+        adapter.setData(analyzedHam, analyzedSpam);
+    }
+
     @Subcomponent(modules = AnalyzeModule.class)
     @ActivityScope
     public interface AnalyzeComponent {
@@ -148,8 +128,10 @@ public class AnalyzeActivity extends BaseActivity implements AnalyzeContract.IAn
         @Provides
         @ActivityScope
         @NonNull
-        public AnalyzePresenter provideAnalyzePresenter(@NonNull InMemoryStore inMemoryStore) {
-            return new AnalyzePresenter(inMemoryStore);
+        public AnalyzePresenter provideAnalyzePresenter(@NonNull Analyzer analyzer) {
+            return new AnalyzePresenter(analyzer);
         }
     }
+
+    private int DELAY_TIME_MILLIS = 500;
 }
