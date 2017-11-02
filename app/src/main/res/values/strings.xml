@@ -6,4 +6,8 @@
     <string name="words">Слова:</string>
     <string name="ham">Ham</string>
     <string name="spam">Spam</string>
+    <string name="check_mine_text">Проверить свой текст</string>
+    <string name="enter_text_and_press_analyze">Введите текст и нажмите \"анализировать\"</string>
+    <string name="analyze">Анализировать</string>
+    <string name="your_text">Ваш текст</string>
 </resources>

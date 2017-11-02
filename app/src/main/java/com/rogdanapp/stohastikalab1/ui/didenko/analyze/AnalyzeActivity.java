@@ -1,5 +1,6 @@
-package com.rogdanapp.stohastikalab1.ui.didenko;
+package com.rogdanapp.stohastikalab1.ui.didenko.analyze;
 
+import android.content.Intent;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
@@ -13,12 +14,14 @@ import com.rogdanapp.stohastikalab1.core.BaseActivity;
 import com.rogdanapp.stohastikalab1.data.pojo.AnalyzerItem;
 import com.rogdanapp.stohastikalab1.di.Injector;
 import com.rogdanapp.stohastikalab1.di.scope.ActivityScope;
+import com.rogdanapp.stohastikalab1.ui.didenko.analyze.input.AnalyzeInputActivity;
 
 import java.util.ArrayList;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import dagger.Module;
 import dagger.Provides;
 import dagger.Subcomponent;
@@ -57,22 +60,12 @@ public class AnalyzeActivity extends BaseActivity implements AnalyzeContract.IAn
         viewPager.setAdapter(adapter);
 
         tabLayout.setupWithViewPager(viewPager);
-        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                viewPager.setCurrentItem(tab.getPosition());
-            }
+    }
 
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
+    @OnClick(R.id.check_text_tv)
+    public void gotoEnterTextActivity() {
+        Intent intent = new Intent(this, AnalyzeInputActivity.class);
+        startActivity(intent);
     }
 
     private void initHandler() {

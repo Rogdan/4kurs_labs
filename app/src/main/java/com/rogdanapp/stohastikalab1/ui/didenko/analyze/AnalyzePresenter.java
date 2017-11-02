@@ -1,4 +1,4 @@
-package com.rogdanapp.stohastikalab1.ui.didenko;
+package com.rogdanapp.stohastikalab1.ui.didenko.analyze;
 
 import com.rogdanapp.stohastikalab1.core.Presenter;
 import com.rogdanapp.stohastikalab1.data.pojo.AnalyzerTask;

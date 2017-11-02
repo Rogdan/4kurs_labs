@@ -77,8 +77,8 @@ public class AnalyzerTask {
         hashMap.put(word, count);
     }
 
-    private String[] format(String text) {
-        return text
+    private String[] format(String line) {
+        return line
                 .toLowerCase()
                 .replaceAll("’","")
                 .replaceAll("\\p{Digit}|\\p{Punct}", " ")

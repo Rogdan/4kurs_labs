@@ -59,14 +59,15 @@
         <item name="android:gravity">start</item>
     </style>
 
+    <style name="BlueButtonStyle" parent="MediumTS">
+        <item name="android:textColor">@color/blue</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:paddingBottom">5dp</item>
+    </style>
+
     <style name="LightHintTV" parent="DarkSubtitleTS">
         <item name="android:textColor">@color/white</item>
         <item name="android:gravity">center</item>
-    </style>
-
-    <style name="FloatInputET">
-        <item name="android:digits">0123456789.</item>
-        <item name="android:inputType">numberDecimal</item>
     </style>
 
     <style name="LayoutWithETStyle">

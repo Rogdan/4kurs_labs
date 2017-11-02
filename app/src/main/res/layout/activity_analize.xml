@@ -3,7 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/latte_background">
 
     <LinearLayout
         android:id="@+id/screen_content"
@@ -22,8 +23,16 @@
 
         <android.support.v4.view.ViewPager
             android:id="@+id/statystic_view_pager"
+            android:layout_weight="1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="0dp"/>
+
+        <TextView
+            android:id="@+id/check_text_tv"
+            style="@style/OrangeButtonStyle"
+            android:text="@string/check_mine_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
     <ProgressBar

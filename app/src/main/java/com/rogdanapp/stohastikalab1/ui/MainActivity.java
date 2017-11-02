@@ -7,7 +7,7 @@ import android.widget.TextView;
 
 import com.rogdanapp.stohastikalab1.R;
 import com.rogdanapp.stohastikalab1.core.BaseActivity;
-import com.rogdanapp.stohastikalab1.ui.didenko.AnalyzeActivity;
+import com.rogdanapp.stohastikalab1.ui.didenko.analyze.AnalyzeActivity;
 
 import butterknife.BindView;
 import butterknife.OnClick;
