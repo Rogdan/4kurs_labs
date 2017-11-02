@@ -3,6 +3,7 @@ package com.rogdanapp.stohastikalab1.ui.didenko;
 import com.rogdanapp.stohastikalab1.core.IBaseView;
 import com.rogdanapp.stohastikalab1.data.pojo.AnalyzerItem;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 
 public class AnalyzeContract {
@@ -11,7 +12,6 @@ public class AnalyzeContract {
     }
 
     interface IAnalyzePresenter {
-
-        void startAnalyze();
+        void startAnalyze(InputStream inputStream);
     }
 }

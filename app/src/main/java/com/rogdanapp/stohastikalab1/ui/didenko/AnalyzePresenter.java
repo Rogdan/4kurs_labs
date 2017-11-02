@@ -1,7 +1,9 @@
 package com.rogdanapp.stohastikalab1.ui.didenko;
 
 import com.rogdanapp.stohastikalab1.core.Presenter;
-import com.rogdanapp.stohastikalab1.data.pojo.Analyzer;
+import com.rogdanapp.stohastikalab1.data.pojo.AnalyzerTask;
+
+import java.io.InputStream;
 
 import javax.inject.Inject;
 
@@ -11,29 +13,29 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 public class AnalyzePresenter extends Presenter<AnalyzeContract.IAnalyzeView> implements AnalyzeContract.IAnalyzePresenter {
-    private Analyzer analyzer;
+    private AnalyzerTask analyzer;
 
     @Inject
-    public AnalyzePresenter(Analyzer analyzer) {
-        this.analyzer = analyzer;
+    public AnalyzePresenter() {
+        analyzer = new AnalyzerTask();
     }
 
     @Override
-    public void startAnalyze() {
+    public void startAnalyze(InputStream inputStream) {
         view().showProgress();
 
         Subscription subscription = Observable.fromCallable(() -> {
-            analyzer.analysisData();
+            analyzer.analyze(inputStream);
 
             return analyzer;
         })
-                .observeOn(Schedulers.newThread())
+                .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(response -> {
                     if (view().isActive()) {
                         view().hideProgress();
 
-                        view().onDataAnalyzed(analyzer.getAnalyzedHam(), analyzer.getAnalyzedSpam());
+                        view().onDataAnalyzed(response.getAnalyzedHam(), response.getAnalyzedSpam());
                     }
                 });
 

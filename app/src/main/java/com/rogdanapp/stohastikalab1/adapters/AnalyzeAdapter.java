@@ -1,5 +1,6 @@
 package com.rogdanapp.stohastikalab1.adapters;
 
+import android.icu.util.ValueIterator;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.widget.TextView;
 
 import com.rogdanapp.stohastikalab1.R;
 import com.rogdanapp.stohastikalab1.data.pojo.AnalyzerItem;
+import com.rogdanapp.stohastikalab1.tools.Informator;
 
 import java.util.ArrayList;
 
@@ -16,14 +18,17 @@ import butterknife.ButterKnife;
 
 public class AnalyzeAdapter extends RecyclerView.Adapter<AnalyzeAdapter.AnalyzeViewHolder>{
     private ArrayList<AnalyzerItem> itemsList;
+    private int visibleItemsCount;
 
     public AnalyzeAdapter(){
         itemsList = new ArrayList<>();
+        visibleItemsCount = 0;
     }
 
     public void setItemsList(ArrayList<AnalyzerItem> itemsList) {
+        visibleItemsCount = 0;
         this.itemsList = itemsList;
-        notifyDataSetChanged();
+        expand();
     }
 
     @Override
@@ -39,11 +44,37 @@ public class AnalyzeAdapter extends RecyclerView.Adapter<AnalyzeAdapter.AnalyzeV
         holder.percentTV.setText("В процентах: " + String.valueOf(item.getInPercent() + "%"));
         holder.countTV.setText("Повторений: " + String.valueOf(item.getCount()));
         holder.wordsTV.setText(item.getLine());
+
+        if (isReachBottom(position) && !isAllItemsExpanded()) {
+            expand();
+        }
     }
 
     @Override
     public int getItemCount() {
-        return itemsList.size();
+        return visibleItemsCount;
+    }
+
+    private boolean isReachBottom(int position) {
+        return position + 1 >= visibleItemsCount;
+    }
+
+    private boolean isAllItemsExpanded() {
+        return visibleItemsCount >= itemsList.size();
+    }
+
+    private void expand() {
+        int wasVisible = visibleItemsCount;
+
+        int appendedItemsCount;
+        if (visibleItemsCount + PAGE_SIZE >= itemsList.size()) {
+            appendedItemsCount = itemsList.size() - visibleItemsCount;
+        } else {
+            appendedItemsCount = PAGE_SIZE;
+        }
+
+        visibleItemsCount += appendedItemsCount;
+        notifyItemRangeInserted(wasVisible, appendedItemsCount);
     }
 
     public class AnalyzeViewHolder extends RecyclerView.ViewHolder {
@@ -59,4 +90,6 @@ public class AnalyzeAdapter extends RecyclerView.Adapter<AnalyzeAdapter.AnalyzeV
             ButterKnife.bind(this, itemView);
         }
     }
+
+    private static final int PAGE_SIZE = 10;
 }

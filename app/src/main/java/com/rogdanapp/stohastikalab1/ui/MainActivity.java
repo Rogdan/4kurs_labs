@@ -25,7 +25,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-        titleTV.setText(R.string.choose_lab);
+        titleTV.setText(R.string.choose_lesson);
         leftIV.setVisibility(View.INVISIBLE);
     }
 

@@ -10,7 +10,6 @@ import android.widget.ProgressBar;
 import com.rogdanapp.stohastikalab1.R;
 import com.rogdanapp.stohastikalab1.adapters.ViewPagerAdapter;
 import com.rogdanapp.stohastikalab1.core.BaseActivity;
-import com.rogdanapp.stohastikalab1.data.pojo.Analyzer;
 import com.rogdanapp.stohastikalab1.data.pojo.AnalyzerItem;
 import com.rogdanapp.stohastikalab1.di.Injector;
 import com.rogdanapp.stohastikalab1.di.scope.ActivityScope;
@@ -78,7 +77,9 @@ public class AnalyzeActivity extends BaseActivity implements AnalyzeContract.IAn
 
     private void initHandler() {
         handler = new Handler();
-        runnable = () -> presenter.startAnalyze();
+        runnable = () -> {
+            presenter.startAnalyze(getResources().openRawResource(R.raw.english));
+        };
     }
 
     @Override
@@ -128,10 +129,10 @@ public class AnalyzeActivity extends BaseActivity implements AnalyzeContract.IAn
         @Provides
         @ActivityScope
         @NonNull
-        public AnalyzePresenter provideAnalyzePresenter(@NonNull Analyzer analyzer) {
-            return new AnalyzePresenter(analyzer);
+        public AnalyzePresenter provideAnalyzePresenter() {
+            return new AnalyzePresenter();
         }
     }
 
-    private int DELAY_TIME_MILLIS = 500;
+    private static final int DELAY_TIME_MILLIS = 500;
 }
