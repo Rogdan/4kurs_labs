@@ -65,6 +65,10 @@ public class Word {
       return suffixes;
    }
 
+   public void setSuffixes(ArrayList<String> suffixes) {
+      this.suffixes = suffixes;
+   }
+
    @Override
    public String toString() {
       if (!suffixes.isEmpty()) {

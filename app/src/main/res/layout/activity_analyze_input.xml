@@ -24,6 +24,7 @@
                 android:layout_height="wrap_content" />
 
             <EditText
+                android:id="@+id/analyze_et"
                 android:hint="@string/your_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />

@@ -1,6 +1,5 @@
 package com.rogdanapp.stohastikalab1.adapters;
 
-import android.icu.util.ValueIterator;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +8,6 @@ import android.widget.TextView;
 
 import com.rogdanapp.stohastikalab1.R;
 import com.rogdanapp.stohastikalab1.data.pojo.AnalyzerItem;
-import com.rogdanapp.stohastikalab1.tools.Informator;
 
 import java.util.ArrayList;
 
@@ -43,7 +41,7 @@ public class AnalyzeAdapter extends RecyclerView.Adapter<AnalyzeAdapter.AnalyzeV
 
         holder.percentTV.setText("В процентах: " + String.valueOf(item.getInPercent() + "%"));
         holder.countTV.setText("Повторений: " + String.valueOf(item.getCount()));
-        holder.wordsTV.setText(item.getLine());
+        holder.wordsTV.setText(item.getText());
 
         if (isReachBottom(position) && !isAllItemsExpanded()) {
             expand();

@@ -8,38 +8,44 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.rogdanapp.stohastikalab1.R;
 import com.rogdanapp.stohastikalab1.data.pojo.AnalyzerItem;
+import com.rogdanapp.stohastikalab1.data.pojo.BaesClass;
 import com.rogdanapp.stohastikalab1.ui.didenko.data_showing.DataShowingFragment;
 
 import java.util.ArrayList;
 
 public class ViewPagerAdapter extends FragmentStatePagerAdapter {
-    private ArrayList<AnalyzerItem> ham, spam;
+    private ArrayList<BaesClass> baesClasses;
     private Context context;
 
     public ViewPagerAdapter(FragmentManager fragmentManager, Context context) {
         super(fragmentManager);
 
         this.context = context;
-        this.ham = new ArrayList<>();
-        this.spam = new ArrayList<>();
+        this.baesClasses = new ArrayList<>();
     }
 
-    public void setData(ArrayList<AnalyzerItem> ham, ArrayList<AnalyzerItem> spam) {
-        this.ham = ham;
-        this.spam = spam;
+    public void setData(ArrayList<BaesClass> baesClasses) {
+        this.baesClasses = baesClasses;
         notifyDataSetChanged();
+    }
+
+
+    public void addItem(BaesClass baesClass) {
+        baesClasses.add(baesClass);
     }
 
     @Override
     public Fragment getItem(int position) {
         DataShowingFragment fragment = new DataShowingFragment();
+        ArrayList<AnalyzerItem> items = baesClasses.get(position).getGroupedFrequency();
+
         switch (position) {
             case HAM_POSITION:
-                fragment.setShowingItems(ham);
+                fragment.setShowingItems(items);
                 break;
             default:
             case SPAM_POSITION:
-                fragment.setShowingItems(spam);
+                fragment.setShowingItems(items);
                 break;
         }
 
@@ -48,17 +54,12 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        return 2;
+        return baesClasses.size();
     }
 
     @Override
     public CharSequence getPageTitle(int position) {
-        switch (position) {
-            case 0:
-                return context.getResources().getString(R.string.ham);
-            default:
-                return context.getResources().getString(R.string.spam);
-        }
+        return baesClasses.get(position).getTypeString();
     }
 
     private static final int HAM_POSITION = 0;

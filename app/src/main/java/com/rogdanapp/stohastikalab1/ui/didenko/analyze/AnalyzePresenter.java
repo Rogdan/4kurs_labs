@@ -1,6 +1,7 @@
 package com.rogdanapp.stohastikalab1.ui.didenko.analyze;
 
 import com.rogdanapp.stohastikalab1.core.Presenter;
+import com.rogdanapp.stohastikalab1.data.InMemoryStore;
 import com.rogdanapp.stohastikalab1.data.pojo.AnalyzerTask;
 
 import java.io.InputStream;
@@ -13,11 +14,11 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 public class AnalyzePresenter extends Presenter<AnalyzeContract.IAnalyzeView> implements AnalyzeContract.IAnalyzePresenter {
-    private AnalyzerTask analyzer;
+    private InMemoryStore inMemoryStore;
 
     @Inject
-    public AnalyzePresenter() {
-        analyzer = new AnalyzerTask();
+    public AnalyzePresenter(InMemoryStore inMemoryStore) {
+        this.inMemoryStore = inMemoryStore;
     }
 
     @Override
@@ -25,17 +26,17 @@ public class AnalyzePresenter extends Presenter<AnalyzeContract.IAnalyzeView> im
         view().showProgress();
 
         Subscription subscription = Observable.fromCallable(() -> {
-            analyzer.analyze(inputStream);
-
-            return analyzer;
+            AnalyzerTask analyzerTask = new AnalyzerTask();
+            return analyzerTask.analyze(inputStream);
         })
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(response -> {
                     if (view().isActive()) {
                         view().hideProgress();
+                        inMemoryStore.setBaesAnalyzeResult(response);
 
-                        view().onDataAnalyzed(response.getAnalyzedHam(), response.getAnalyzedSpam());
+                        view().onDataAnalyzed(response.getHamResult(), response.getSpamResult());
                     }
                 });
 

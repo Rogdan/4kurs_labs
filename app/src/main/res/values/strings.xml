@@ -10,4 +10,38 @@
     <string name="enter_text_and_press_analyze">Введите текст и нажмите \"анализировать\"</string>
     <string name="analyze">Анализировать</string>
     <string name="your_text">Ваш текст</string>
+    <string name="text_coudnt_be_empty">Текст не может быть пустым</string>
+
+    <string-array name="words_to_ignore">
+        <item>the</item>
+        <item>some</item>
+        <item>then</item>
+        <item>that</item>
+        <item>and</item>
+        <item>are</item>
+        <item>only</item>
+        <item>just</item>
+        <item>but</item>
+        <item>alone</item>
+        <item>solely</item>
+        <item>merely</item>
+        <item>barely</item>
+        <item>etc</item>
+        <item>simply</item>
+        <item>still</item>
+        <item>just</item>
+        <item>yet</item>
+        <item>all</item>
+        <item>only</item>
+        <item>quite</item>
+        <item>even</item>
+        <item>too</item>
+        <item>also</item>
+        <item>not</item>
+        <item>never</item>
+        <item>just</item>
+        <item>only</item>
+        <item>for</item>
+        <item>about</item>
+    </string-array>
 </resources>

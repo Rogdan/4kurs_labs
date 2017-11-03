@@ -11,7 +11,9 @@ import android.widget.ProgressBar;
 import com.rogdanapp.stohastikalab1.R;
 import com.rogdanapp.stohastikalab1.adapters.ViewPagerAdapter;
 import com.rogdanapp.stohastikalab1.core.BaseActivity;
+import com.rogdanapp.stohastikalab1.data.InMemoryStore;
 import com.rogdanapp.stohastikalab1.data.pojo.AnalyzerItem;
+import com.rogdanapp.stohastikalab1.data.pojo.BaesClass;
 import com.rogdanapp.stohastikalab1.di.Injector;
 import com.rogdanapp.stohastikalab1.di.scope.ActivityScope;
 import com.rogdanapp.stohastikalab1.ui.didenko.analyze.input.AnalyzeInputActivity;
@@ -107,8 +109,11 @@ public class AnalyzeActivity extends BaseActivity implements AnalyzeContract.IAn
     }
 
     @Override
-    public void onDataAnalyzed(ArrayList<AnalyzerItem> analyzedHam, ArrayList<AnalyzerItem> analyzedSpam) {
-        adapter.setData(analyzedHam, analyzedSpam);
+    public void onDataAnalyzed(BaesClass hamResult, BaesClass spamResult) {
+        adapter.addItem(hamResult);
+        adapter.addItem(spamResult);
+
+        adapter.notifyDataSetChanged();
     }
 
     @Subcomponent(modules = AnalyzeModule.class)
@@ -122,8 +127,8 @@ public class AnalyzeActivity extends BaseActivity implements AnalyzeContract.IAn
         @Provides
         @ActivityScope
         @NonNull
-        public AnalyzePresenter provideAnalyzePresenter() {
-            return new AnalyzePresenter();
+        public AnalyzePresenter provideAnalyzePresenter(@NonNull InMemoryStore inMemoryStore) {
+            return new AnalyzePresenter(inMemoryStore);
         }
     }
 

@@ -7,7 +7,7 @@ import java.io.Serializable;
 public class AnalyzerItem implements Comparable<AnalyzerItem>, Serializable{
     private float inPercent;
     private int count;
-    private String line;
+    private String text;
 
     public float getInPercent() {
         return inPercent;
@@ -25,12 +25,12 @@ public class AnalyzerItem implements Comparable<AnalyzerItem>, Serializable{
         this.count = count;
     }
 
-    public String getLine() {
-        return line;
+    public String getText() {
+        return text;
     }
 
-    public void setLine(String line) {
-        this.line = line;
+    public void setText(String text) {
+        this.text = text;
     }
 
     @Override
