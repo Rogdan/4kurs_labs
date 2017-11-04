@@ -1,21 +1,47 @@
 <resources>
     <string name="app_name">Лаба 1</string>
-    <string name="init_auto">Автозаполнение</string>
-    <string name="start">Стартуем!</string>
-    <string name="continue_string">Продолжить</string>
+    <!-- Didenko -->
+    <string name="didenko_labs">Интеллектуальный анализ данных</string>
+    <string name="choose_lesson">Выберите предмет</string>
+    <string name="words">Слова:</string>
+    <string name="ham">Ham</string>
+    <string name="spam">Spam</string>
+    <string name="check_mine_text">Проверить свой текст</string>
+    <string name="enter_text_and_press_analyze">Введите текст и нажмите \"анализировать\"</string>
+    <string name="analyze">Анализировать</string>
+    <string name="your_text">Ваш текст</string>
+    <string name="text_coudnt_be_empty">Текст не может быть пустым</string>
 
-    <string name="chances">Вероятности</string>
-    <string name="sleep_chance">Уснуть</string>
-    <string name="up_chance">Хода вверх</string>
-    <string name="down_chance">Хода вних</string>
-    <string name="left_chance">Хода влево</string>
-    <string name="right_chance">Хода вправо</string>
-
-    <string name="field">Поле</string>
-    <string name="width">Ширина</string>
-    <string name="height">Высота</string>
-
-    <string name="start_coordinates">Начальные координаты</string>
-    <string name="x">X</string>
-    <string name="y">Y</string>
+    <string-array name="words_to_ignore">
+        <item>the</item>
+        <item>some</item>
+        <item>then</item>
+        <item>that</item>
+        <item>and</item>
+        <item>are</item>
+        <item>only</item>
+        <item>just</item>
+        <item>but</item>
+        <item>alone</item>
+        <item>solely</item>
+        <item>merely</item>
+        <item>barely</item>
+        <item>etc</item>
+        <item>simply</item>
+        <item>still</item>
+        <item>just</item>
+        <item>yet</item>
+        <item>all</item>
+        <item>only</item>
+        <item>quite</item>
+        <item>even</item>
+        <item>too</item>
+        <item>also</item>
+        <item>not</item>
+        <item>never</item>
+        <item>just</item>
+        <item>only</item>
+        <item>for</item>
+        <item>about</item>
+    </string-array>
 </resources>

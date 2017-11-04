@@ -1,162 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.rogdanapp.stohastikalab1.ui.MainActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white">
 
     <include
-        layout="@layout/item_title_bar"
-        android:id="@+id/title_bar"/>
+        android:id="@+id/title_bar"
+        layout="@layout/item_title_bar"/>
 
     <ScrollView
-        android:layout_above="@+id/start_button"
         android:layout_below="@+id/title_bar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:scrollbars="vertical">
 
         <LinearLayout
-            android:paddingStart="@dimen/app_left_right_margins"
-            android:paddingEnd="@dimen/app_left_right_margins"
             android:paddingTop="@dimen/app_top_bottom_margins"
             android:paddingBottom="@dimen/app_top_bottom_margins"
-            android:orientation="vertical"
+            android:paddingStart="@dimen/app_left_right_margins"
+            android:paddingEnd="@dimen/app_left_right_margins"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <TextView
+                android:id="@+id/didenko_labs_tv"
+                android:text="@string/didenko_labs"
                 style="@style/GreyButtonStyle"
-                android:text="@string/init_auto"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
-
-            <TextView
-                style="@style/DarkSubtitleTS"
-                android:text="@string/chances"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <EditText
-                android:id="@+id/sleep_chance_et"
-                android:hint="@string/sleep_chance"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="numberDecimal"
-                />
-
-            <EditText
-                android:id="@+id/up_chance_et"
-                android:layout_marginTop="10dp"
-                android:hint="@string/up_chance"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="numberDecimal"
-                />
-
-            <EditText
-                android:id="@+id/down_chance_et"
-                android:layout_marginTop="10dp"
-                android:hint="@string/down_chance"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="numberDecimal"
-                />
-
-            <EditText
-                android:id="@+id/right_chance_et"
-                android:layout_marginTop="10dp"
-                android:hint="@string/right_chance"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="numberDecimal"
-                />
-
-            <EditText
-                android:id="@+id/left_chance_et"
-                android:layout_marginTop="10dp"
-                android:hint="@string/left_chance"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="numberDecimal"/>
-
-            <TextView
-                style="@style/DarkSubtitleTS"
-                android:text="@string/field"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <EditText
-                    android:id="@+id/width_et"
-                    android:hint="@string/width"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="5dp"
-                    android:inputType="numberDecimal"
-                    android:imeOptions="actionNext"
-                    android:nextFocusForward="@+id/height_et"
-                    />
-
-                <EditText
-                    android:id="@+id/height_et"
-                    android:layout_weight="1"
-                    android:hint="@string/height"
-                    android:layout_width="0dp"
-                    android:layout_marginStart="5dp"
-                    android:layout_height="wrap_content"
-                    android:inputType="numberDecimal"
-                    android:imeOptions="actionNext"
-                    android:nextFocusForward="@+id/x_et"
-                    />
-            </LinearLayout>
-
-            <TextView
-                style="@style/DarkSubtitleTS"
-                android:text="@string/start_coordinates"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <EditText
-                    android:id="@+id/x_et"
-                    android:hint="@string/x"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="5dp"
-                    android:imeOptions="actionNext"
-                    android:inputType="numberDecimal"
-                    android:nextFocusForward="@+id/y_et"
-                    />
-
-                <EditText
-                    android:id="@+id/y_et"
-                    android:layout_weight="1"
-                    android:hint="@string/y"
-                    android:layout_width="0dp"
-                    android:layout_marginStart="5dp"
-                    android:layout_height="wrap_content"
-                    android:imeOptions="actionDone"
-                    android:inputType="numberDecimal"/>
-            </LinearLayout>
         </LinearLayout>
     </ScrollView>
-
-    <TextView
-        android:id="@+id/start_button"
-        android:text="@string/continue_string"
-        android:layout_alignParentBottom="true"
-        style="@style/OrangeButtonStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
 </RelativeLayout>

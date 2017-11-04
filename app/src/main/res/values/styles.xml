@@ -12,7 +12,7 @@
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">18sp</item>
         <item name="android:gravity">center</item>
-        <item name="android:textColor">@color/greyishBrown</item>
+        <item name="android:textColor">@color/greyish_brown</item>
     </style>
 
     <style name="ButtonStyle">
@@ -30,7 +30,7 @@
     </style>
 
     <style name="GreyButtonStyle" parent="ButtonStyle">
-        <item name="android:background">@color/grey</item>
+        <item name="android:background">@drawable/ripple_grey_button</item>
         <item name="android:textColor">@color/white</item>
     </style>
 
@@ -41,5 +41,38 @@
         <item name="android:textSize">18sp</item>
         <item name="android:gravity">start</item>
         <item name="android:textColor">@color/dark_gray</item>
+    </style>
+
+    <style name="MediumTS">
+        <item name="android:textColor">@color/grey</item>
+        <item name="android:paddingTop">5dp</item>
+        <item name="android:paddingBottom">0dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:gravity">start</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="LightSubtitle">
+        <item name="android:paddingTop">5dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:gravity">start</item>
+    </style>
+
+    <style name="BlueButtonStyle" parent="MediumTS">
+        <item name="android:textColor">@color/blue</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:paddingBottom">5dp</item>
+    </style>
+
+    <style name="LightHintTV" parent="DarkSubtitleTS">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="LayoutWithETStyle">
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:focusableInTouchMode">true</item>
     </style>
 </resources>
