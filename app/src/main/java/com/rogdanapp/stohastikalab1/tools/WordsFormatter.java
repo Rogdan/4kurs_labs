@@ -42,8 +42,8 @@ public class WordsFormatter {
 
     public static boolean isWordValid(String word) {
         return hasNormalLength(word)
-                && !toIgnore.contains(word);
-                //&& hasLoudLetters(word);
+                && !toIgnore.contains(word)
+                && hasLoudLetters(word);
     }
 
     /*any word must contain more then 3 letter*/

@@ -2,10 +2,16 @@ package com.rogdanapp.stohastikalab1.ui.didenko.analyze.input;
 
 import com.rogdanapp.stohastikalab1.core.Presenter;
 import com.rogdanapp.stohastikalab1.data.InMemoryStore;
+import com.rogdanapp.stohastikalab1.data.pojo.AnalyzerTask;
 import com.rogdanapp.stohastikalab1.data.pojo.BaesAnalyzeResult;
 import com.rogdanapp.stohastikalab1.tools.Informator;
 
 import javax.inject.Inject;
+
+import rx.Observable;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 public class AnalyzeInputPresenter extends Presenter<AnalyzeInputContract.IAnalyzeInputView> implements AnalyzeInputContract.IAnalyzeInputPresenter {
     private InMemoryStore inMemoryStore;
@@ -17,13 +23,29 @@ public class AnalyzeInputPresenter extends Presenter<AnalyzeInputContract.IAnaly
 
     @Override
     public void startAnalyze(String textToAnalyze) {
-        textToAnalyze = textToAnalyze.trim().toLowerCase();
-        BaesAnalyzeResult analyzeResult = inMemoryStore.getBaesAnalyzeResult();
-        
-        double spamProbability = analyzeResult.getSpamProbability(textToAnalyze);
-        double spamProbabilityPercent = spamProbability * 100;
-        double hamProbabilityPercent = 100 - spamProbability;
+        view().showProgress();
 
-        Informator.log("S: " + spamProbabilityPercent +"%, H: " + hamProbabilityPercent);
+        BaesAnalyzeResult analyzeResult = inMemoryStore.getBaesAnalyzeResult();
+        final String message = textToAnalyze.trim().toLowerCase();
+
+        Subscription subscription = Observable.fromCallable(() -> analyzeResult.getSpamProbability(message))
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(spamProbability -> {
+                    if (view().isActive()) {
+                        view().hideProgress();
+
+                        double spamProbabilityPercent = spamProbability * 100;
+                        double hamProbabilityPercent = 100 - spamProbabilityPercent;
+
+                        view().onDataAnalyzed(spamProbabilityPercent, hamProbabilityPercent);
+                    }
+                }, throwable -> {
+                    if (view().isActive()) {
+                        view().hideProgress();
+                    }
+                });
+
+        subscriptionsToUnbind.add(subscription);
     }
 }

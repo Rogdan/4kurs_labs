@@ -25,10 +25,6 @@ public class BaesClass {
         wordsCount = 0;
     }
 
-    public int getClassUniqueWordsCount() {
-        return dataMap.size();
-    }
-
     public int getMessageCount() {
         return messageCount;
     }
@@ -41,7 +37,7 @@ public class BaesClass {
         return dataMap;
     }
 
-    public double calculateInnerLog(int allUniqueWordsCount, ArrayList<String> filtratedWordsList) {
+    public double calculateInnerLn(int allUniqueWordsCount, ArrayList<String> filtratedWordsList) {
         double result = 0;
         for (String wordString : filtratedWordsList) {
             int wordRepeatingCount = 0;

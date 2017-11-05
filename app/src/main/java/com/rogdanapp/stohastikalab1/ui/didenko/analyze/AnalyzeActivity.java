@@ -30,8 +30,6 @@ import dagger.Subcomponent;
 
 public class AnalyzeActivity extends BaseActivity implements AnalyzeContract.IAnalyzeView{
     private ViewPagerAdapter adapter;
-    private Handler handler;
-    private Runnable runnable;
 
     @Inject
     protected AnalyzePresenter presenter;
@@ -52,7 +50,6 @@ public class AnalyzeActivity extends BaseActivity implements AnalyzeContract.IAn
 
     @Override
     protected void initView() {
-        initHandler();
         initViewPager();
     }
 
@@ -70,25 +67,11 @@ public class AnalyzeActivity extends BaseActivity implements AnalyzeContract.IAn
         startActivity(intent);
     }
 
-    private void initHandler() {
-        handler = new Handler();
-        runnable = () -> {
-            presenter.startAnalyze(getResources().openRawResource(R.raw.english));
-        };
-    }
-
-    @Override
-    public void onDestroy(){
-        super.onDestroy();
-        handler.removeCallbacks(runnable);
-    }
-
     @Override
     protected void providePresenter() {
         Injector.getApplicationComponent().plus(new AnalyzeModule()).inject(this);
         presenter.bindView(this);
-        showProgress();
-        handler.postDelayed(runnable, DELAY_TIME_MILLIS);
+        presenter.startAnalyze(getResources().openRawResource(R.raw.english));
     }
 
     @Override

@@ -11,6 +11,7 @@
     <string name="analyze">Анализировать</string>
     <string name="your_text">Ваш текст</string>
     <string name="text_coudnt_be_empty">Текст не может быть пустым</string>
+    <string name="analyze_result_format">Вероятноть спама: %f %%\nВероятность хама: %f %%</string>
 
     <string-array name="words_to_ignore">
         <item>the</item>

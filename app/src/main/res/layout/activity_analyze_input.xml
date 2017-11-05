@@ -5,38 +5,62 @@
     android:layout_height="match_parent"
     android:background="@color/white">
 
-
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:padding="36dp"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <LinearLayout
+                android:id="@+id/input_linear"
+                android:orientation="vertical"
+                android:paddingTop="36dp"
+                android:paddingStart="36dp"
+                android:paddingEnd="36dp"
+                android:paddingBottom="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    style="@style/DarkSubtitleTS"
+                    android:text="@string/enter_text_and_press_analyze"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <EditText
+                    android:id="@+id/analyze_et"
+                    android:hint="@string/your_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/analyze_button_tv"
+                    style="@style/BlueButtonStyle"
+                    android:text="@string/analyze"
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
             <TextView
+                android:layout_below="@+id/input_linear"
+                android:id="@+id/analyze_result_tv"
+                android:paddingStart="36dp"
+                android:paddingEnd="36dp"
                 style="@style/DarkSubtitleTS"
-                android:text="@string/enter_text_and_press_analyze"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <EditText
-                android:id="@+id/analyze_et"
-                android:hint="@string/your_text"
+            <ProgressBar
+                android:visibility="gone"
+                android:id="@+id/progress_bar"
+                android:padding="5dp"
+                android:layout_alignParentBottom="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
-
-            <TextView
-                android:id="@+id/analyze_button_tv"
-                style="@style/BlueButtonStyle"
-                android:text="@string/analyze"
-                android:layout_width="wrap_content"
-                android:layout_gravity="end"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
+        </RelativeLayout>
     </ScrollView>
 
     <ImageView
