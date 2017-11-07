@@ -16,6 +16,7 @@
         android:scrollbars="vertical">
 
         <LinearLayout
+            android:orientation="vertical"
             android:paddingTop="@dimen/app_top_bottom_margins"
             android:paddingBottom="@dimen/app_top_bottom_margins"
             android:paddingStart="@dimen/app_left_right_margins"
@@ -24,9 +25,17 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/didenko_labs_tv"
-                android:text="@string/didenko_labs"
+                android:id="@+id/didenko_lab_2_3_tv"
+                android:text="@string/didenko_labs_2_3"
                 style="@style/GreyButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/didenko_lab_4_tv"
+                android:layout_marginTop="23dp"
+                style="@style/GreyButtonStyle"
+                android:text="@string/page_rank_lab_4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </LinearLayout>

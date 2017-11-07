@@ -8,6 +8,7 @@ import android.widget.TextView;
 import com.rogdanapp.stohastikalab1.R;
 import com.rogdanapp.stohastikalab1.core.BaseActivity;
 import com.rogdanapp.stohastikalab1.ui.didenko.analyze.AnalyzeActivity;
+import com.rogdanapp.stohastikalab1.ui.didenko.page_rank.PageRankActivity;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -25,13 +26,19 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-        titleTV.setText(R.string.choose_lesson);
+        titleTV.setText(R.string.choose_lab);
         leftIV.setVisibility(View.INVISIBLE);
     }
 
-    @OnClick(R.id.didenko_labs_tv)
-    protected void gotoDidenkoLab(){
+    @OnClick(R.id.didenko_lab_2_3_tv)
+    protected void gotoLab2And3(){
         Intent intent = new Intent(this, AnalyzeActivity.class);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.didenko_lab_4_tv)
+    protected void gotoLab4(){
+        Intent intent = new Intent(this, PageRankActivity.class);
         startActivity(intent);
     }
 

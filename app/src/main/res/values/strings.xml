@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">Лаба 1</string>
     <!-- Didenko -->
-    <string name="didenko_labs">Интеллектуальный анализ данных</string>
-    <string name="choose_lesson">Выберите предмет</string>
+    <string name="didenko_labs_2_3">Наивный Баесовкий классификатор (л.р. 3 и 4)</string>
+    <string name="choose_lab">Выберите лаболаторную работу</string>
     <string name="words">Слова:</string>
     <string name="ham">Ham</string>
     <string name="spam">Spam</string>
@@ -45,4 +45,12 @@
         <item>for</item>
         <item>about</item>
     </string-array>
+
+    <!-- Page rank -->
+    <string name="http">http://</string>
+    <string name="link">Ссылка</string>
+    <string name="enter_address">Введите адрес сайта</string>
+    <string name="calculate_page_rank">Посчитать PageRank</string>
+    <string name="page_rank">Page Rank</string>
+    <string name="page_rank_lab_4">Page Rank (л.р. 4)</string>
 </resources>
