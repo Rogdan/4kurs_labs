@@ -7,6 +7,7 @@ public class PageRankPresenter extends Presenter<PageRankContract.IPageRankView>
 
     @Override
     public void calculatePageRank(String link) {
-        view().onPageRankCalculated(12);
+        view().onPageRankCalculated(12); // for tests
+        view().hideProgress();
     }
 }

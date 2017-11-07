@@ -1,10 +1,13 @@
 package com.rogdanapp.stohastikalab1.ui.didenko.page_rank_lab_4;
 
 import android.support.annotation.NonNull;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.rogdanapp.stohastikalab1.R;
 import com.rogdanapp.stohastikalab1.core.BaseActivity;
@@ -43,11 +46,22 @@ public class PageRankActivity extends BaseActivity implements PageRankContract.I
     @Override
     protected void initView() {
         titleTV.setText(R.string.page_rank);
+
+        linkET.setOnEditorActionListener((v, actionId, event) -> {
+            if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) || (actionId == EditorInfo.IME_ACTION_DONE)) {
+                calculatePageRank();
+            }
+
+            return false;
+        });
     }
 
     @OnClick(R.id.calculate_page_rank_tv)
     protected void calculatePageRank() {
-        Informator.toast(this, "В разработке");
+        if (calculatePageRankTV.isEnabled()) {
+            String uri = linkET.getText().toString();
+            presenter.calculatePageRank(uri);
+        }
     }
 
     @OnClick(R.id.status_bar_left_iv)
@@ -71,6 +85,7 @@ public class PageRankActivity extends BaseActivity implements PageRankContract.I
         progressBar.setVisibility(View.VISIBLE);
         pageRankResultTV.setVisibility(View.GONE);
         calculatePageRankTV.setEnabled(false);
+        linkET.setEnabled(false);
     }
 
     @Override
@@ -78,6 +93,7 @@ public class PageRankActivity extends BaseActivity implements PageRankContract.I
         progressBar.setVisibility(View.GONE);
         pageRankResultTV.setVisibility(View.VISIBLE);
         calculatePageRankTV.setEnabled(true);
+        linkET.setEnabled(true);
     }
 
     @Override

@@ -26,6 +26,8 @@
             android:id="@+id/link_et"
             android:hint="@string/link"
             android:layout_width="match_parent"
+            android:inputType="textUri"
+            android:imeOptions="actionDone"
             android:layout_height="wrap_content" />
 
         <TextView
