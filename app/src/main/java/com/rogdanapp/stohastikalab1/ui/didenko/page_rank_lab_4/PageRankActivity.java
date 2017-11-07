@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.rogdanapp.stohastikalab1.R;
 import com.rogdanapp.stohastikalab1.core.BaseActivity;
+import com.rogdanapp.stohastikalab1.di.Injector;
 import com.rogdanapp.stohastikalab1.di.scope.ActivityScope;
 import com.rogdanapp.stohastikalab1.tools.Informator;
 
@@ -56,6 +57,7 @@ public class PageRankActivity extends BaseActivity implements PageRankContract.I
 
     @Override
     protected void providePresenter() {
+        Injector.getApplicationComponent().plus(new PageRankModule()).inject(this);
         presenter.bindView(this);
     }
 
