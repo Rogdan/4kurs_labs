@@ -7,8 +7,8 @@ import android.widget.TextView;
 
 import com.rogdanapp.stohastikalab1.R;
 import com.rogdanapp.stohastikalab1.core.BaseActivity;
-import com.rogdanapp.stohastikalab1.ui.didenko.analyze.AnalyzeActivity;
-import com.rogdanapp.stohastikalab1.ui.didenko.page_rank.PageRankActivity;
+import com.rogdanapp.stohastikalab1.ui.didenko.naive_bayes_lab_2_3.analyze.AnalyzeActivity;
+import com.rogdanapp.stohastikalab1.ui.didenko.page_rank_lab_4.PageRankActivity;
 
 import butterknife.BindView;
 import butterknife.OnClick;

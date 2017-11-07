@@ -1,4 +1,4 @@
-package com.rogdanapp.stohastikalab1.ui.didenko.data_showing;
+package com.rogdanapp.stohastikalab1.ui.didenko.naive_bayes_lab_2_3.data_showing;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;

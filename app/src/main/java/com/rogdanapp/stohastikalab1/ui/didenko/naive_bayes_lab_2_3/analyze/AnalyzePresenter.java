@@ -1,4 +1,4 @@
-package com.rogdanapp.stohastikalab1.ui.didenko.analyze;
+package com.rogdanapp.stohastikalab1.ui.didenko.naive_bayes_lab_2_3.analyze;
 
 import com.rogdanapp.stohastikalab1.core.Presenter;
 import com.rogdanapp.stohastikalab1.data.InMemoryStore;

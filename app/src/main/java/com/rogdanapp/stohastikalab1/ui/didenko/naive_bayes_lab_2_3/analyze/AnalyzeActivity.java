@@ -1,7 +1,6 @@
-package com.rogdanapp.stohastikalab1.ui.didenko.analyze;
+package com.rogdanapp.stohastikalab1.ui.didenko.naive_bayes_lab_2_3.analyze;
 
 import android.content.Intent;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -12,13 +11,10 @@ import com.rogdanapp.stohastikalab1.R;
 import com.rogdanapp.stohastikalab1.adapters.ViewPagerAdapter;
 import com.rogdanapp.stohastikalab1.core.BaseActivity;
 import com.rogdanapp.stohastikalab1.data.InMemoryStore;
-import com.rogdanapp.stohastikalab1.data.pojo.AnalyzerItem;
 import com.rogdanapp.stohastikalab1.data.pojo.BaesClass;
 import com.rogdanapp.stohastikalab1.di.Injector;
 import com.rogdanapp.stohastikalab1.di.scope.ActivityScope;
-import com.rogdanapp.stohastikalab1.ui.didenko.analyze.input.AnalyzeInputActivity;
-
-import java.util.ArrayList;
+import com.rogdanapp.stohastikalab1.ui.didenko.naive_bayes_lab_2_3.input.AnalyzeInputActivity;
 
 import javax.inject.Inject;
 

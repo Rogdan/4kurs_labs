@@ -1,4 +1,4 @@
-package com.rogdanapp.stohastikalab1.ui.didenko.analyze.input;
+package com.rogdanapp.stohastikalab1.ui.didenko.naive_bayes_lab_2_3.input;
 
 import android.support.annotation.NonNull;
 import android.view.View;

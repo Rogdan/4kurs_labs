@@ -53,4 +53,5 @@
     <string name="calculate_page_rank">Посчитать PageRank</string>
     <string name="page_rank">Page Rank</string>
     <string name="page_rank_lab_4">Page Rank (л.р. 4)</string>
+    <string name="result_format">Результат: %s</string>
 </resources>

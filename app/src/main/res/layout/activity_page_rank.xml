@@ -3,8 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/latte_background"
-    >
+    android:background="@color/latte_background">
 
     <include
         layout="@layout/item_title_bar"
@@ -38,18 +37,19 @@
             android:layout_height="wrap_content" />
 
         <TextView
-            android:id="@+id/page_rank_result"
+            android:visibility="gone"
+            android:layout_marginTop="10dp"
+            android:id="@+id/page_rank_result_tv"
             style="@style/DarkSubtitleTS"
-            android:text="PageRank: 8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <ProgressBar
+            android:visibility="gone"
+            android:layout_marginTop="10dp"
+            android:id="@+id/progress_bar"
+            android:padding="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>
-
-    <ProgressBar
-        android:visibility="gone"
-        android:id="@+id/progress_bar"
-        style="?android:progressBarStyleLarge"
-        android:layout_centerInParent="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
 </RelativeLayout>
