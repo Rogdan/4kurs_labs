@@ -2,7 +2,7 @@ package com.rogdanapp.stohastikalab1.ui.didenko.naive_bayes_lab_2_3.analyze;
 
 import com.rogdanapp.stohastikalab1.core.Presenter;
 import com.rogdanapp.stohastikalab1.data.InMemoryStore;
-import com.rogdanapp.stohastikalab1.data.pojo.AnalyzerTask;
+import com.rogdanapp.stohastikalab1.data.pojo.naive_bayes.AnalyzerTask;
 
 import java.io.InputStream;
 

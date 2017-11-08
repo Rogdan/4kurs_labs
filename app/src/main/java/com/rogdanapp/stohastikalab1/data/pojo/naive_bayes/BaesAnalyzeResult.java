@@ -1,4 +1,4 @@
-package com.rogdanapp.stohastikalab1.data.pojo;
+package com.rogdanapp.stohastikalab1.data.pojo.naive_bayes;
 
 import com.rogdanapp.stohastikalab1.tools.WordsFormatter;
 

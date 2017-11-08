@@ -2,7 +2,7 @@ package com.rogdanapp.stohastikalab1.ui.didenko.naive_bayes_lab_2_3.input;
 
 import com.rogdanapp.stohastikalab1.core.Presenter;
 import com.rogdanapp.stohastikalab1.data.InMemoryStore;
-import com.rogdanapp.stohastikalab1.data.pojo.BaesAnalyzeResult;
+import com.rogdanapp.stohastikalab1.data.pojo.naive_bayes.BaesAnalyzeResult;
 
 import javax.inject.Inject;
 

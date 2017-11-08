@@ -5,8 +5,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.rogdanapp.stohastikalab1.data.pojo.AnalyzerItem;
-import com.rogdanapp.stohastikalab1.data.pojo.BaesClass;
+import com.rogdanapp.stohastikalab1.data.pojo.naive_bayes.AnalyzerItem;
+import com.rogdanapp.stohastikalab1.data.pojo.naive_bayes.BaesClass;
 import com.rogdanapp.stohastikalab1.ui.didenko.naive_bayes_lab_2_3.data_showing.DataShowingFragment;
 
 import java.util.ArrayList;

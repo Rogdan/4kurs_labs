@@ -25,6 +25,7 @@
         <EditText
             android:id="@+id/link_et"
             android:hint="@string/link"
+            android:text="https://uz.gov.ua"
             android:layout_width="match_parent"
             android:inputType="textUri"
             android:imeOptions="actionDone"

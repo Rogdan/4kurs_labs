@@ -1,6 +1,4 @@
-package com.rogdanapp.stohastikalab1.data.pojo;
-
-import com.rogdanapp.stohastikalab1.tools.Informator;
+package com.rogdanapp.stohastikalab1.data.pojo.naive_bayes;
 
 import java.util.ArrayList;
 import java.util.Collections;

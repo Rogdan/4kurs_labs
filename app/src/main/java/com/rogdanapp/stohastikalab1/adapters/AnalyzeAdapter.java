@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.rogdanapp.stohastikalab1.R;
-import com.rogdanapp.stohastikalab1.data.pojo.AnalyzerItem;
+import com.rogdanapp.stohastikalab1.data.pojo.naive_bayes.AnalyzerItem;
 
 import java.util.ArrayList;
 

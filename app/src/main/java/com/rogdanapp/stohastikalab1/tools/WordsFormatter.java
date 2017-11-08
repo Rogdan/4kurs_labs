@@ -1,7 +1,5 @@
 package com.rogdanapp.stohastikalab1.tools;
 
-import com.rogdanapp.stohastikalab1.data.pojo.Word;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 
