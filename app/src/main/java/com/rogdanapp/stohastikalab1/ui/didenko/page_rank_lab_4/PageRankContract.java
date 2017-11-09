@@ -4,11 +4,11 @@ import com.rogdanapp.stohastikalab1.core.IBaseView;
 
 public interface PageRankContract {
     interface IPageRankView extends IBaseView {
-        void onPageRankCalculated(double pageRank);
+        void onPageRankCalculated(double pageRank, int pagesFound);
         void onCalculatingError(String message);
     }
 
     interface IPageRankPresenter {
-        void calculatePageRank(String link);
+        void calculatePageRank(String link, int iterationCount);
     }
 }

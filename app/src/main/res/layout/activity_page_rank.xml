@@ -3,7 +3,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/latte_background">
+    android:background="@color/latte_background"
+    android:clickable="true"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
 
     <include
         layout="@layout/item_title_bar"
@@ -14,22 +17,50 @@
         android:layout_margin="36dp"
         android:layout_below="@+id/title_bar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+
+        <android.support.design.widget.TextInputLayout
+            android:hint="@string/link"
+            android:nextFocusDown="@+id/iteration_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/link_et"
+                android:text="@string/default_link"
+                android:layout_width="match_parent"
+                android:inputType="textUri"
+                android:imeOptions="actionNext"
+                android:layout_height="wrap_content" />
+        </android.support.design.widget.TextInputLayout>
 
         <TextView
-            android:text="@string/enter_address"
-            style="@style/DarkSubtitleTS"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:id="@+id/clear_link_tv"
+            style="@style/RedButtonStyle"
+            android:text="@string/clear"
+            android:layout_width="wrap_content"
+            android:layout_gravity="end"
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:focusableInTouchMode="true"/>
 
-        <EditText
-            android:id="@+id/link_et"
-            android:hint="@string/link"
-            android:text="https://uz.gov.ua"
+        <android.support.design.widget.TextInputLayout
+            android:hint="@string/iteration_count"
             android:layout_width="match_parent"
-            android:inputType="textUri"
-            android:imeOptions="actionDone"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/iteration_et"
+                android:text="100"
+                android:layout_width="match_parent"
+                android:inputType="numberDecimal"
+                android:digits="0123456789"
+                android:imeOptions="actionDone"
+                android:layout_height="wrap_content" />
+        </android.support.design.widget.TextInputLayout>
 
         <TextView
             android:id="@+id/calculate_page_rank_tv"
@@ -37,7 +68,9 @@
             android:text="@string/calculate_page_rank"
             android:layout_width="wrap_content"
             android:layout_gravity="end"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:focusableInTouchMode="true"/>
 
         <TextView
             android:visibility="gone"

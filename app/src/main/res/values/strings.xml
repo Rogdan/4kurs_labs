@@ -53,5 +53,11 @@
     <string name="calculate_page_rank">Посчитать PageRank</string>
     <string name="page_rank">Page Rank</string>
     <string name="page_rank_lab_4">Page Rank (л.р. 4)</string>
-    <string name="result_format">Результат: %s</string>
+    <string name="result_format">PageRank:\n%s\n\nСтраниц проанализировано:\n%d</string>
+    <string name="iteration_count">Количество итераций</string>
+    <string name="default_iterations_count">100</string>
+    <string name="clear">Очистить</string>
+    <string name="enter_link">Введите ссылку!</string>
+    <string name="enter_iterations_count">Введите количество итераций алгоритма!</string>
+    <string name="default_link">http://digits.ru/</string>
 </resources>

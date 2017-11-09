@@ -7,13 +7,11 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.rogdanapp.stohastikalab1.R;
 import com.rogdanapp.stohastikalab1.core.BaseActivity;
 import com.rogdanapp.stohastikalab1.di.Injector;
 import com.rogdanapp.stohastikalab1.di.scope.ActivityScope;
-import com.rogdanapp.stohastikalab1.tools.Informator;
 
 import javax.inject.Inject;
 
@@ -37,6 +35,10 @@ public class PageRankActivity extends BaseActivity implements PageRankContract.I
     protected ProgressBar progressBar;
     @BindView(R.id.page_rank_result_tv)
     protected TextView pageRankResultTV;
+    @BindView(R.id.iteration_et)
+    protected EditText iterationET;
+    @BindView(R.id.clear_link_tv)
+    protected TextView clearTV;
 
     @Override
     protected int getLayoutId() {
@@ -47,7 +49,7 @@ public class PageRankActivity extends BaseActivity implements PageRankContract.I
     protected void initView() {
         titleTV.setText(R.string.page_rank);
 
-        linkET.setOnEditorActionListener((v, actionId, event) -> {
+        iterationET.setOnEditorActionListener((v, actionId, event) -> {
             if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) || (actionId == EditorInfo.IME_ACTION_DONE)) {
                 calculatePageRank();
             }
@@ -56,12 +58,35 @@ public class PageRankActivity extends BaseActivity implements PageRankContract.I
         });
     }
 
+    @OnClick(R.id.clear_link_tv)
+    protected void clearLink() {
+        linkET.setText("");
+    }
+
     @OnClick(R.id.calculate_page_rank_tv)
     protected void calculatePageRank() {
         if (calculatePageRankTV.isEnabled()) {
-            String uri = linkET.getText().toString();
-            presenter.calculatePageRank(uri);
+
+            String uriString = linkET.getText().toString().trim();
+            if (uriString.isEmpty()) {
+                showError(R.string.enter_link, linkET);
+                return;
+            }
+
+            String iterationsCountString = iterationET.getText().toString().trim();
+            if (iterationsCountString.isEmpty()) {
+                showError(R.string.enter_iterations_count, iterationET);
+                return;
+            }
+
+            presenter.calculatePageRank(uriString, Integer.valueOf(iterationsCountString));
+            linkET.setError(null);
         }
+    }
+
+    private void showError(int errorResId, EditText editText) {
+        String errorText = getString(errorResId);
+        editText.setError(errorText);
     }
 
     @OnClick(R.id.status_bar_left_iv)
@@ -84,22 +109,27 @@ public class PageRankActivity extends BaseActivity implements PageRankContract.I
     public void showProgress() {
         progressBar.setVisibility(View.VISIBLE);
         pageRankResultTV.setVisibility(View.GONE);
-        calculatePageRankTV.setEnabled(false);
-        linkET.setEnabled(false);
+        setComponentsEnabled(false);
     }
 
     @Override
     public void hideProgress() {
         progressBar.setVisibility(View.GONE);
         pageRankResultTV.setVisibility(View.VISIBLE);
-        calculatePageRankTV.setEnabled(true);
-        linkET.setEnabled(true);
+        setComponentsEnabled(true);
+    }
+
+    private void setComponentsEnabled(boolean isEnabled) {
+        calculatePageRankTV.setEnabled(isEnabled);
+        iterationET.setEnabled(isEnabled);
+        linkET.setEnabled(isEnabled);
+        clearTV.setEnabled(isEnabled);
     }
 
     @Override
-    public void onPageRankCalculated(double pageRank) {
+    public void onPageRankCalculated(double pageRank, int pagesFound) {
         String resultFormat = getString(R.string.result_format);
-        String result = String.format(resultFormat, String.valueOf(pageRank));
+        String result = String.format(resultFormat, String.valueOf(pageRank), pagesFound);
         pageRankResultTV.setText(result);
     }
 

@@ -1,6 +1,6 @@
 package com.rogdanapp.stohastikalab1.data.pojo.page_rank;
 
-import android.webkit.URLUtil;
+import android.support.annotation.Nullable;
 
 import com.rogdanapp.stohastikalab1.tools.Informator;
 
@@ -9,63 +9,90 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.URL;
-import java.net.URLConnection;
-import java.util.HashSet;
+import java.util.HashMap;
 
 import rx.Observable;
-import rx.Subscription;
 
 public class PageRankTask {
-    private HashSet<String> allLinks;
+    private HashMap<String, Page> allPages;
     private String mainLink;
     private String domain;
+    private PageRankResult taskResult;
 
     public PageRankTask(String mainLink) throws URISyntaxException {
         this.mainLink = mainLink;
-        this.allLinks = new HashSet<>();
+        this.allPages = new HashMap<>();
 
-        extractDomainName();
+        domain = extractDomain(mainLink);
         Informator.log("PageRankTest created. Link: " + mainLink + ", domain: " + domain);
     }
 
-    private void extractDomainName() throws URISyntaxException {
-        URI uri = new URI(mainLink);
+    private String extractDomain(String link) throws URISyntaxException {
+        URI uri = new URI(link);
         String domain = uri.getHost();
-        this.domain = domain.startsWith("www.") ? domain.substring(4) : domain;
+
+        if (domain == null) {
+            throw new URISyntaxException("проверьте правильность ссылки.", "Ошибка при попытке проверить домен");
+        }
+        return domain.startsWith("www.") ? domain.substring(4) : domain;
     }
 
-    public Observable<Integer> runCalculation() {
+    //todo сделать многозадачность
+    public Observable<PageRankResult> runCalculation(int iterationCount) {
+        taskResult = new PageRankResult();
+
         return Observable.fromCallable(() -> {
-            pageRankRecursion(mainLink);
-            return 10;
+            Page rootPage = buildNodeHierarchy(mainLink);
+
+            for (int i = 0; i < iterationCount; i++) {
+                for (String url : allPages.keySet()) {
+                    Page page = allPages.get(url);
+                    page.iterate(i);
+                }
+            }
+
+            taskResult.setPagesFound(allPages.keySet().size());
+            if (rootPage == null) {
+                taskResult.setFinalPageRank(UNDEFINED_DOUBLE);
+            } else {
+                rootPage.flush();
+                taskResult.setFinalPageRank(rootPage.getRank());
+            }
+
+            return taskResult;
         });
     }
 
-    private void pageRankRecursion(String url) {
-        if (!allLinks.contains(url)) {
-            allLinks.add(url);
-        }
-
-        Informator.log("Run recursion. Link: " + url);
-
+    @Nullable
+    private Page buildNodeHierarchy(String url) {
+        Page page = null;
         try {
             Document document = Jsoup.connect(url).get();
-            PageNode pageNode = new PageNode(url);
+            Informator.log("Start analyze. Link: " + url);
+
+            page = new Page(url);
             Elements elements = document.select("a");
+
+            if (!allPages.containsKey(url)) {
+                allPages.put(url, page);
+            }
 
             for(Element element : elements){
                 String innerLink = element.absUrl("href");
-                if (belongDomain(innerLink)) {
-                    pageNode.addInnerLink(innerLink);
 
-                    if (!allLinks.contains(innerLink)) {
-                        allLinks.add(innerLink);
-                        pageRankRecursion(innerLink);
+                if (isLinkValid(innerLink)) {
+                    Page innerPage;
+
+                    if (allPages.containsKey(innerLink)) {
+                        innerPage = allPages.get(innerLink);
+                    } else {
+                        innerPage = buildNodeHierarchy(innerLink);
+                    }
+
+                    if (innerPage != null) {
+                        page.addInnerLink(innerPage);
                     }
                 }
             }
@@ -73,10 +100,26 @@ public class PageRankTask {
             Informator.error(getClass(), "Ошибка подключения по ссылке: " + url + ". Сообщения ошибки: " + e.getMessage());
         }
 
-        Informator.log("===== End recursion. Link: " + url + " =====");
+        if (page != null) {
+            Informator.log("End analyze. Inner links:" + page.getInnerLinksCount() + " Link: " + url);
+        }
+        return page;
     }
 
-    private boolean belongDomain(String uri) {
-        return uri.contains(domain);
+    private boolean isLinkValid(String uri) {
+        return !uri.contains("#") && belongDomain(uri);
     }
+
+    private boolean belongDomain(String uri){
+        String uriDomain = null;
+        try {
+            uriDomain = extractDomain(uri);
+        } catch (URISyntaxException e) {
+            return false;
+        }
+
+        return uriDomain.equals(domain);
+    }
+
+    private static final double UNDEFINED_DOUBLE = -1d;
 }

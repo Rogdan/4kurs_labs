@@ -11,18 +11,17 @@ import rx.schedulers.Schedulers;
 
 public class PageRankPresenter extends Presenter<PageRankContract.IPageRankView> implements PageRankContract.IPageRankPresenter {
     @Override
-    public void calculatePageRank(String link) {
+    public void calculatePageRank(String link, int iterationCount) {
         try {
+            view().showProgress();
             PageRankTask pageRankTask = new PageRankTask(link);
 
-            view().showProgress();
-
-            Subscription subscription = pageRankTask.runCalculation()
+            Subscription subscription = pageRankTask.runCalculation(iterationCount)
                     .subscribeOn(Schedulers.newThread())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(response -> {
                         if (view().isActive()) {
-                            view().onPageRankCalculated(response);
+                            view().onPageRankCalculated(response.getFinalPageRank(), response.getPagesFound());
                             view().hideProgress();
                         }
                     }, throwable -> {
@@ -35,7 +34,8 @@ public class PageRankPresenter extends Presenter<PageRankContract.IPageRankView>
             subscriptionsToUnbind.add(subscription);
 
         } catch (URISyntaxException e) {
-            view().onCalculatingError("Не верный формат ссылки: " + e.getMessage());
+            view().hideProgress();
+            view().onCalculatingError(e.getMessage());
         }
     }
 }
