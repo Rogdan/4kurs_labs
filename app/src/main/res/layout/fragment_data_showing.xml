@@ -10,8 +10,8 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/statistic_recycler_view"
         android:layout_width="match_parent"
-        android:clipToPadding="false"
         android:layout_height="match_parent"
+        android:clipToPadding="false"
         android:scrollbarStyle="outsideOverlay"
         android:scrollbars="vertical"
         android:paddingTop="30dp"

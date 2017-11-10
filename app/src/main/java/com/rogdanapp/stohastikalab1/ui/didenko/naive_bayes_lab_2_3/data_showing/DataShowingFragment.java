@@ -1,4 +1,4 @@
-package com.rogdanapp.stohastikalab1.ui.didenko.data_showing;
+package com.rogdanapp.stohastikalab1.ui.didenko.naive_bayes_lab_2_3.data_showing;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -6,7 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import com.rogdanapp.stohastikalab1.R;
 import com.rogdanapp.stohastikalab1.adapters.AnalyzeAdapter;
 import com.rogdanapp.stohastikalab1.core.BaseFragment;
-import com.rogdanapp.stohastikalab1.data.pojo.AnalyzerItem;
+import com.rogdanapp.stohastikalab1.data.pojo.naive_bayes.AnalyzerItem;
 
 import java.util.ArrayList;
 

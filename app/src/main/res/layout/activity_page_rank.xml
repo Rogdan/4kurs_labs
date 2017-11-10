@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/latte_background"
+    android:clickable="true"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
+
+    <include
+        layout="@layout/item_title_bar"
+        android:id="@+id/title_bar"/>
+
+    <ScrollView
+        android:layout_below="@+id/title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/input_layout"
+            android:orientation="vertical"
+            android:padding="36dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:focusableInTouchMode="true">
+
+            <android.support.design.widget.TextInputLayout
+                android:hint="@string/link"
+                android:nextFocusDown="@+id/iteration_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/link_et"
+                    android:text="@string/default_link"
+                    android:layout_width="match_parent"
+                    android:inputType="textUri"
+                    android:imeOptions="actionNext"
+                    android:layout_height="wrap_content" />
+            </android.support.design.widget.TextInputLayout>
+
+            <TextView
+                android:id="@+id/clear_link_tv"
+                style="@style/RedButtonStyle"
+                android:text="@string/clear"
+                android:layout_width="wrap_content"
+                android:layout_gravity="end"
+                android:layout_height="wrap_content"
+                android:focusable="true"
+                android:focusableInTouchMode="true"/>
+
+            <android.support.design.widget.TextInputLayout
+                android:hint="@string/iteration_count"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/iteration_et"
+                    android:text="@string/default_iterations_count"
+                    android:layout_width="match_parent"
+                    android:inputType="numberDecimal"
+                    android:digits="0123456789"
+                    android:imeOptions="actionDone"
+                    android:layout_height="wrap_content" />
+            </android.support.design.widget.TextInputLayout>
+
+            <TextView
+                android:id="@+id/calculate_page_rank_tv"
+                style="@style/BlueButtonStyle"
+                android:text="@string/calculate_page_rank"
+                android:layout_width="wrap_content"
+                android:layout_gravity="end"
+                android:layout_height="wrap_content"
+                android:focusable="true"
+                android:focusableInTouchMode="true"/>
+
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                android:visibility="gone"
+                android:layout_gravity="center"
+                android:paddingTop="50dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <android.support.v7.widget.RecyclerView
+                android:visibility="gone"
+                android:id="@+id/page_rank_rv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:scrollbarStyle="outsideOverlay"
+                android:scrollbars="vertical"
+                android:paddingTop="30dp"
+                android:paddingBottom="30dp"/>
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

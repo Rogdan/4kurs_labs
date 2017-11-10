@@ -1,6 +1,6 @@
 package com.rogdanapp.stohastikalab1.data;
 
-import com.rogdanapp.stohastikalab1.data.pojo.BaesAnalyzeResult;
+import com.rogdanapp.stohastikalab1.data.pojo.naive_bayes.BaesAnalyzeResult;
 
 public class InMemoryStore {
     private static BaesAnalyzeResult baesAnalyzeResult;

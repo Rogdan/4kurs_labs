@@ -1,8 +1,8 @@
 <resources>
-    <string name="app_name">Лаба 1</string>
+    <string name="app_name">Лабы</string>
     <!-- Didenko -->
-    <string name="didenko_labs">Интеллектуальный анализ данных</string>
-    <string name="choose_lesson">Выберите предмет</string>
+    <string name="didenko_labs_2_3">Наивный Баесовкий классификатор (л.р. 3 и 4)</string>
+    <string name="choose_lab">Выберите лаболаторную работу</string>
     <string name="words">Слова:</string>
     <string name="ham">Ham</string>
     <string name="spam">Spam</string>
@@ -11,6 +11,7 @@
     <string name="analyze">Анализировать</string>
     <string name="your_text">Ваш текст</string>
     <string name="text_coudnt_be_empty">Текст не может быть пустым</string>
+    <string name="analyze_result_format">Вероятноть спама: %f %%\nВероятность хама: %f %%</string>
 
     <string-array name="words_to_ignore">
         <item>the</item>
@@ -44,4 +45,21 @@
         <item>for</item>
         <item>about</item>
     </string-array>
+
+    <!-- Page rank -->
+    <string name="http">http://</string>
+    <string name="link">Ссылка</string>
+    <string name="enter_address">Введите адрес сайта</string>
+    <string name="calculate_page_rank">Посчитать PageRank</string>
+    <string name="page_rank">Page Rank</string>
+    <string name="page_rank_lab_4">Page Rank (л.р. 4)</string>
+    <string name="iteration_count">Количество итераций</string>
+    <string name="default_iterations_count">10</string>
+    <string name="clear">Очистить</string>
+    <string name="enter_link">Введите ссылку!</string>
+    <string name="enter_iterations_count">Введите количество итераций алгоритма!</string>
+    <string name="default_link">http://digits.ru/</string>
+    <string name="page_rank_format">PageRank: %,d</string>
+    <string name="page_format">Страница: %s</string>
+    <string name="inner_links_count_format">Внутренних ссылок: %d</string>
 </resources>
