@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Лаба 1</string>
+    <string name="app_name">Лабы</string>
     <!-- Didenko -->
     <string name="didenko_labs_2_3">Наивный Баесовкий классификатор (л.р. 3 и 4)</string>
     <string name="choose_lab">Выберите лаболаторную работу</string>
@@ -53,11 +53,13 @@
     <string name="calculate_page_rank">Посчитать PageRank</string>
     <string name="page_rank">Page Rank</string>
     <string name="page_rank_lab_4">Page Rank (л.р. 4)</string>
-    <string name="result_format">PageRank:\n%s\n\nСтраниц проанализировано:\n%d</string>
     <string name="iteration_count">Количество итераций</string>
-    <string name="default_iterations_count">100</string>
+    <string name="default_iterations_count">10</string>
     <string name="clear">Очистить</string>
     <string name="enter_link">Введите ссылку!</string>
     <string name="enter_iterations_count">Введите количество итераций алгоритма!</string>
     <string name="default_link">http://digits.ru/</string>
+    <string name="page_rank_format">PageRank: %,d</string>
+    <string name="page_format">Страница: %s</string>
+    <string name="inner_links_count_format">Внутренних ссылок: %d</string>
 </resources>

@@ -11,6 +11,8 @@ import org.jsoup.select.Elements;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 
 import rx.Observable;
@@ -19,7 +21,6 @@ public class PageRankTask {
     private HashMap<String, Page> allPages;
     private String mainLink;
     private String domain;
-    private PageRankResult taskResult;
 
     public PageRankTask(String mainLink) throws URISyntaxException {
         this.mainLink = mainLink;
@@ -39,29 +40,31 @@ public class PageRankTask {
         return domain.startsWith("www.") ? domain.substring(4) : domain;
     }
 
-    //todo сделать многозадачность
-    public Observable<PageRankResult> runCalculation(int iterationCount) {
-        taskResult = new PageRankResult();
-
+    //todo сделать многопоточность
+    public Observable<ArrayList<Page>> runCalculation(int iterationCount) {
         return Observable.fromCallable(() -> {
             Page rootPage = buildNodeHierarchy(mainLink);
 
-            for (int i = 0; i < iterationCount; i++) {
+            if (rootPage != null) {
+                for (int i = 0; i < iterationCount; i++) {
+                    for (String url : allPages.keySet()) {
+                        Page page = allPages.get(url);
+                        page.iterate(i);
+                    }
+                }
+
+                ArrayList<Page> pages = new ArrayList<>();
                 for (String url : allPages.keySet()) {
                     Page page = allPages.get(url);
-                    page.iterate(i);
+                    page.flush();
+                    pages.add(page);
                 }
-            }
 
-            taskResult.setPagesFound(allPages.keySet().size());
-            if (rootPage == null) {
-                taskResult.setFinalPageRank(UNDEFINED_DOUBLE);
+                Collections.sort(pages);
+                return pages;
             } else {
-                rootPage.flush();
-                taskResult.setFinalPageRank(rootPage.getRank());
+                throw new Exception("Не удалось подключится к странице. Проверьте правильность ссылки.");
             }
-
-            return taskResult;
         });
     }
 
@@ -111,7 +114,7 @@ public class PageRankTask {
     }
 
     private boolean belongDomain(String uri){
-        String uriDomain = null;
+        String uriDomain;
         try {
             uriDomain = extractDomain(uri);
         } catch (URISyntaxException e) {
@@ -120,6 +123,4 @@ public class PageRankTask {
 
         return uriDomain.equals(domain);
     }
-
-    private static final double UNDEFINED_DOUBLE = -1d;
 }

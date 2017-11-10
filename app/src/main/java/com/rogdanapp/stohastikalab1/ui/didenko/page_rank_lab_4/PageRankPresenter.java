@@ -21,7 +21,7 @@ public class PageRankPresenter extends Presenter<PageRankContract.IPageRankView>
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(response -> {
                         if (view().isActive()) {
-                            view().onPageRankCalculated(response.getFinalPageRank(), response.getPagesFound());
+                            view().onPageRankCalculated(response);
                             view().hideProgress();
                         }
                     }, throwable -> {
@@ -32,7 +32,6 @@ public class PageRankPresenter extends Presenter<PageRankContract.IPageRankView>
                     });
 
             subscriptionsToUnbind.add(subscription);
-
         } catch (URISyntaxException e) {
             view().hideProgress();
             view().onCalculatingError(e.getMessage());
