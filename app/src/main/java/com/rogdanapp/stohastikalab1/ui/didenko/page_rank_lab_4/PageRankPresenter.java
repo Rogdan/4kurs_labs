@@ -1,9 +1,11 @@
 package com.rogdanapp.stohastikalab1.ui.didenko.page_rank_lab_4;
 
 import com.rogdanapp.stohastikalab1.core.Presenter;
+import com.rogdanapp.stohastikalab1.data.pojo.page_rank.Page;
 import com.rogdanapp.stohastikalab1.data.pojo.page_rank.PageRankTask;
 
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;

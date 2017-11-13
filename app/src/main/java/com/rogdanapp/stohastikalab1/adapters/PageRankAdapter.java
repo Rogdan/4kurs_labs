@@ -48,7 +48,7 @@ public class PageRankAdapter extends RecyclerView.Adapter<PageRankAdapter.PageRa
         holder.linkTV.setText(String.format(pageFormat, page.getPageLink()));
 
         String pageRankFormat = context.getResources().getString(R.string.page_rank_format);
-        holder.pageRankTV.setText(String.format(pageRankFormat, (int)page.getRank()));
+        holder.pageRankTV.setText(String.format(pageRankFormat, page.getRank()));
 
         String innerLinksFormat = context.getResources().getString(R.string.inner_links_count_format);
         holder.innerLinksTV.setText(String.format(innerLinksFormat, page.getInnerLinksCount()));

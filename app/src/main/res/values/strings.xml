@@ -59,7 +59,7 @@
     <string name="enter_link">Введите ссылку!</string>
     <string name="enter_iterations_count">Введите количество итераций алгоритма!</string>
     <string name="default_link">http://digits.ru/</string>
-    <string name="page_rank_format">PageRank: %,d</string>
+    <string name="page_rank_format">PageRank: %f</string>
     <string name="page_format">Страница: %s</string>
     <string name="inner_links_count_format">Внутренних ссылок: %d</string>
 </resources>

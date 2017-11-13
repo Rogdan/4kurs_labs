@@ -46,26 +46,30 @@ public class PageRankTask {
             Page rootPage = buildNodeHierarchy(mainLink);
 
             if (rootPage != null) {
-                for (int i = 0; i < iterationCount; i++) {
-                    for (String url : allPages.keySet()) {
-                        Page page = allPages.get(url);
-                        page.iterate(i);
-                    }
-                }
-
-                ArrayList<Page> pages = new ArrayList<>();
-                for (String url : allPages.keySet()) {
-                    Page page = allPages.get(url);
-                    page.flush();
-                    pages.add(page);
-                }
-
-                Collections.sort(pages);
-                return pages;
+                return iterate(iterationCount);
             } else {
                 throw new Exception("Не удалось подключится к странице. Проверьте правильность ссылки.");
             }
         });
+    }
+
+    public ArrayList<Page> iterate(int iterationCount) {
+        for (int i = 0; i < iterationCount; i++) {
+            for (String url : allPages.keySet()) {
+                Page page = allPages.get(url);
+                page.iterate(i);
+            }
+        }
+
+        ArrayList<Page> pages = new ArrayList<>();
+        for (String url : allPages.keySet()) {
+            Page page = allPages.get(url);
+            page.flush();
+            pages.add(page);
+        }
+
+        Collections.sort(pages);
+        return pages;
     }
 
     @Nullable
@@ -122,5 +126,9 @@ public class PageRankTask {
         }
 
         return uriDomain.equals(domain);
+    }
+
+    public String getMainLink() {
+        return mainLink;
     }
 }

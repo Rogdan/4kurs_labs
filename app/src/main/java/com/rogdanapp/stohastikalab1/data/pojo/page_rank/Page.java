@@ -18,10 +18,7 @@ public class Page implements Comparable<Page>{
         this.pageLink = pageLink;
         this.damping = 0.85;
 
-        innerLinks = new HashSet<>();
-        currentRank = 1;
-        currentIteration = 0;
-        bufferRank = 0;
+        clear();
     }
 
     public void addInnerLink(Page link) {
@@ -38,14 +35,21 @@ public class Page implements Comparable<Page>{
     }
 
     private void checkIteration(int iterationNumber) {
-        if (currentIteration != iterationNumber) {
+        if (currentIteration < iterationNumber) {
             currentIteration = iterationNumber;
             flush();
         }
     }
 
+    private void clear() {
+        innerLinks = new HashSet<>();
+        currentRank = 1;
+        currentIteration = 0;
+        bufferRank = 0;
+    }
+
     public void flush() {
-        currentRank += bufferRank;
+        currentRank = (1 - damping) + bufferRank;
         bufferRank = 0;
     }
 
